@@ -1,0 +1,36 @@
+{
+  "name": "sexual-health-information-etl",
+  "version": "0.1.0",
+  "description": "ETL to retrieve sexual health information and support services from syndication and store as JSON",
+  "main": "app.js",
+  "repository": "https://github.com/nhsuk/sexual-health-information-etl.git",
+  "author": "mark <markharrop@yahoo.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "async": "^2.5.0",
+    "azure-storage": "^2.4.0",
+    "google-libphonenumber": "^3.0.3",
+    "moment": "^2.18.1",
+    "nhsuk-bunyan-logger": "^1.4.1",
+    "require-environment-variables": "^1.1.2",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.6.1",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-config-nhsuk": "^0.7.0",
+    "eslint-plugin-import": "^2.6.1",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-watch": "^3.1.2",
+    "husky": "^0.14.2",
+    "istanbul": "^0.4.5",
+    "mocha": "^4.0.0",
+    "nock": "^9.0.14",
+    "nodemon": "^1.11.0",
+    "snyk": "^1.40.2"
+  }
+}
