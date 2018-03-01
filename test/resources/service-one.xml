@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed 
+  xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">NHS Choices - 56 Dean Street Express</title>
+  <id>http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356</id>
+  <rights type="text">© Crown Copyright 2009</rights>
+  <updated>2018-03-01T11:20:06Z</updated>
+  <category term="Service" />
+  <logo>http://www.nhs.uk/nhscwebservices/documents/logo1.jpg</logo>
+  <author>
+    <name>NHS Choices</name>
+    <uri>http://www.nhs.uk</uri>
+    <email>webservices@nhschoices.nhs.uk</email>
+  </author>
+  <link rel="self" type="application/xml" title="NHS Choices - 56 Dean Street Express" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=bbccdd" />
+  <link rel="alternate" title="NHS Choices - 56 Dean Street Express" href="http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=8972333" />
+  <tracking 
+    xmlns="http://syndication.nhschoices.nhs.uk/services">&lt;img style="border: 0; width: 1px; height: 1px;" alt="" src="http://statse.webtrendslive.com/dcss9yzisf9xjyg74mgbihg8p_8d2u/njs.gif?dcsuri=/services%2ftypes%2fsexualhealthinformationandsupport%2f19708356&amp;amp;wt.js=no&amp;amp;wt.cg_n=syndication"/&gt;
+  </tracking>
+  <complete 
+    xmlns="http://purl.org/syndication/history/1.0">
+  </complete>
+  <entry>
+    <id>http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356</id>
+    <title type="text">56 Dean Street Express</title>
+    <updated>2018-03-01T11:20:06Z</updated>
+    <link rel="self" title="56 Dean Street Express" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=bbccdd" />
+    <link rel="alternate" title="56 Dean Street Express" href="http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=8972333" />
+    <content type="application/xml">
+      <s:service 
+        xmlns:s="http://syndication.nhschoices.nhs.uk/services">
+        <s:name firstLetter="5">One</s:name>
+        <s:type firstLetter="S">Sexual health information and support</s:type>
+        <s:summaryText></s:summaryText>
+        <s:WebAddress>http://www.56deanstreet.nhs.uk/</s:WebAddress>
+        <s:address>
+          <s:addressLine>56 Dean Street</s:addressLine>
+          <s:addressLine>Soho</s:addressLine>
+          <s:addressLine>London</s:addressLine>
+          <s:addressLine>Greater London</s:addressLine>
+          <s:postcode>W1D 6AQ</s:postcode>
+        </s:address>
+        <s:contact type="General">
+          <s:telephone>020 3315 6699</s:telephone>
+          <s:email>56deanstreet@chelwest.nhs.uk</s:email>
+        </s:contact>
+        <s:longitude>-0.132011265</s:longitude>
+        <s:latitude>51.51251</s:latitude>
+        <s:thingsShouldKnow></s:thingsShouldKnow>
+        <s:SuppliedBy>Serco Global Services</s:SuppliedBy>
+        <s:SuppliedOn>2018-02-20 00:00:00Z</s:SuppliedOn>
+        <s:nonCoreElements>
+          <s:nonCoreElement>
+            <s:elementTitle>Service details</s:elementTitle>
+            <s:elementText>56 Dean street express is a non-judgemental, confidential and free sexual health service for young people aged 19 and under based in Westminster. At Cont@ct we offer:  • Free condoms  • Emergency contraception (morning after pill)  • Testing for sexually transmitted infections (STIs) and HIV • Contraception and family planning including pills, injections, implants and IUD/IUS (coils) • Advice on pregnancy and abortion  • Safe sex advice  • Advice about relationships</s:elementText>
+          </s:nonCoreElement>
+          <s:nonCoreElement>
+            <s:elementTitle>Opening times</s:elementTitle>
+            <s:elementText>Monday to Friday 3:30 - 4.30pm (walk-in)</s:elementText>
+          </s:nonCoreElement>
+          <s:nonCoreElement>
+            <s:elementTitle>Venue Type</s:elementTitle>
+            <s:elementText>Clinic</s:elementText>
+          </s:nonCoreElement>
+        </s:nonCoreElements>
+      </s:service>
+    </content>
+  </entry>
+</feed>

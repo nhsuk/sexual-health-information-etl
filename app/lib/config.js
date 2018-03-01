@@ -8,7 +8,6 @@ const config = {
   outputFile: 'shis-data',
   idListFile: 'ids',
   containerName: process.env.CONTAINER_NAME || 'etl-output',
-  orgApiUrl: 'https://api.nhs.uk/organisations',
   syndicationApiUrl: 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport',
 };
 

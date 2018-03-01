@@ -26,7 +26,9 @@ async function etlComplete() {
   etlStore.saveRecords();
   etlStore.saveSummary();
   logStatus();
-  await dataService.uploadData();
+  if (etlStore.getRecords().length > 0) {
+    await dataService.uploadData();
+  }
   if (resolvePromise) {
     resolvePromise();
   }
@@ -45,8 +47,8 @@ async function smartEtl(dataServiceIn) {
   clearState();
   etlStore.setLastRunDate(moment('2018-02-20'));
 
-  // eslint-disable-next-line no-await-in-loop
-  const pageIds = await getModifiedIds(etlStore.getLastRunDate());
+  // only one page of results despite there being over 800 records
+  const pageIds = await getModifiedIds(etlStore.getLastRunDate(), 1);
   etlStore.addIds(pageIds);
   log.info(`Total ids: ${pageIds.length}`);
   pageIds.forEach(etlStore.deleteRecord);
