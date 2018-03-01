@@ -6,7 +6,6 @@ const moment = require('moment');
 const utils = require('./utils');
 
 const outputFile = `${config.outputDir}/${config.outputFile}.json`;
-const idListFile = `${config.outputDir}/ids.json`;
 const summaryFile = `${config.outputDir}/summary.json`;
 
 const datePattern = /.*pharmacy-seed-ids-(\d+).json/i;
@@ -65,8 +64,6 @@ function getSuffix() {
 }
 
 async function uploadData() {
-  log.info('Saving date stamped version of ID list in Azure');
-  await azureService.uploadToAzure(idListFile, `${utils.getFilePrefix()}pharmacy-seed-ids-${getDatestamp()}.json`);
   log.info(`Overwriting '${config.outputFile}' in Azure`);
   await azureService.uploadToAzure(outputFile, `${utils.getFilePrefix()}${config.outputFile}.json`);
   log.info(`Saving date stamped version of '${config.outputFile}' in Azure`);

@@ -1,7 +1,7 @@
 const utils = require('../utils');
 
 function fromSummary(serviceSummary) {
-  return serviceSummary.id && serviceSummary.id.split('/').pop();
+  return utils.getId(serviceSummary.id);
 }
 
 function fromResults(results) {

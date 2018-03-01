@@ -128,7 +128,11 @@
             "nonCoreElement": [
               {
                 "elementTitle": "Service details",
-                "elementText": "56 Dean street express is a non-judgemental, confidential and free sexual health service for young people aged 19 and under based in Westminster. At Cont@ct we offer:  • Free condoms  • Emergency contraception (morning after pill)  • Testing for sexually transmitted infections (STIs) and HIV • Contraception and family planning including pills, injections, implants and IUD/IUS (coils) • Advice on pregnancy and abortion  • Safe sex advice  • Advice about relationships"
+                "elementText": "Some service details text"
+              },
+              {
+                "elementTitle": "General notes",
+                "elementText": "Some general notes"
               },
               {
                 "elementTitle": "Opening times",
