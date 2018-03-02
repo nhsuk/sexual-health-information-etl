@@ -101,7 +101,7 @@ function saveState() {
 }
 
 function clearState() {
-  ids = [];
+  clearIds();
   cache = {};
   lastRunDate = undefined;
   clearFailedIds();

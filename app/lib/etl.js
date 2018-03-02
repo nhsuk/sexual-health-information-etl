@@ -42,23 +42,41 @@ function startPopulateRecordsFromIdsQueue() {
   populateRecordsFromIdsQueue.start(options);
 }
 
-async function smartEtl(dataServiceIn) {
+async function loadLatestEtlData() {
+  const { data, date } = await dataService.getLatestData(utils.getMajorMinorVersion());
+  if (date) {
+    log.info(`Last ${utils.getMajorMinorVersion()} data uploaded on ${etlStore.getLastRunDate()}`);
+    etlStore.setLastRunDate(date);
+    data.map(etlStore.addRecord);
+  }
+}
+
+async function etl(dataServiceIn) {
   dataService = dataServiceIn;
   clearState();
+  // set initial date to last known run date
   etlStore.setLastRunDate(moment('2018-02-20'));
+  await loadLatestEtlData();
 
   // only one page of results despite there being over 800 records
   const pageIds = await getModifiedIds(etlStore.getLastRunDate(), 1);
-  etlStore.addIds(pageIds);
   log.info(`Total ids: ${pageIds.length}`);
-  pageIds.forEach(etlStore.deleteRecord);
-  startPopulateRecordsFromIdsQueue();
+  if (pageIds.length === 0) {
+    log.info('No modified records, exiting');
+    if (resolvePromise) {
+      resolvePromise();
+    }
+  } else {
+    etlStore.addIds(pageIds);
+    pageIds.forEach(etlStore.deleteRecord);
+    startPopulateRecordsFromIdsQueue();
+  }
 }
 
 function start(dataServiceIn) {
   return new Promise((resolve, reject) => {
     try {
-      smartEtl(dataServiceIn);
+      etl(dataServiceIn);
     } catch (ex) {
       log.error(ex);
       reject(ex);
