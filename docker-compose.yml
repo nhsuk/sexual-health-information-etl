@@ -1,0 +1,22 @@
+version: '2.1'
+
+services:
+
+  base-etl:
+    build:
+      context: .
+    volumes:
+      - .:/code
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+
+  etl:
+    extends:
+      service: base-etl
+    volumes:
+      - etl-node_modules:/code/node_modules
+
+volumes:
+  etl-node_modules:
