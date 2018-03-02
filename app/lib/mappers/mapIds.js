@@ -4,12 +4,9 @@ function fromSummary(serviceSummary) {
   return utils.getId(serviceSummary.id);
 }
 
-function fromResults(results) {
+function mapIds(results) {
   return results.feed && results.feed.entry ?
     utils.asArray(results.feed.entry).map(fromSummary).filter(o => o !== undefined) : [];
 }
 
-module.exports = {
-  fromResults,
-  fromSummary,
-};
+module.exports = mapIds;

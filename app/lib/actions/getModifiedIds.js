@@ -1,10 +1,10 @@
 const service = require('../syndicationService');
-const mapId = require('../mappers/mapId');
+const mapIds = require('../mappers/mapIds');
 
 async function getModifiedIds(moment, pageNo) {
   try {
     const pageJson = await service.getModifiedSincePage(moment, pageNo);
-    return mapId.fromResults(pageJson);
+    return mapIds(pageJson);
   } catch (ex) {
     if (ex.message.includes(' 404')) {
       return [];

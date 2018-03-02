@@ -20,11 +20,8 @@ describe('mapService', () => {
     expect(service.contacts).to.exist;
     expect(service.contacts.telephone).to.equal('020 3315 6699');
     expect(service.contacts.website).to.equal('http://www.56deanstreet.nhs.uk/');
+    // location logic fully tested in mapLocation unit test
     expect(service.location).to.exist;
-    expect(service.location.type).to.equal('Point');
-    expect(service.location.coordinates).to.exist;
-    expect(service.location.coordinates[0]).to.equal(-0.132011265);
-    expect(service.location.coordinates[1]).to.equal(51.51251);
     expect(service.serviceDetails).to.equal('Some service details text');
     expect(service.generalNotes).to.equal('Some general notes');
     expect(service.openingTimes).to.equal('Monday to Friday 3:30 - 4.30pm (walk-in)');
