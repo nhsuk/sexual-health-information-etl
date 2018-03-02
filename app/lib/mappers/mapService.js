@@ -1,6 +1,7 @@
 const utils = require('../utils');
 const mapLocation = require('./mapLocation');
-const nonCore = require('./mapNonCoreElements');
+const mapNonCore = require('./mapNonCoreElements');
+const mapContacts = require('./mapContacts');
 
 function mapService(rawService) {
   const entry = rawService.feed.entry;
@@ -13,15 +14,12 @@ function mapService(rawService) {
       addressLines: service.address.addressLine,
       postcode: service.address.postcode
     },
-    contacts: {
-      telephone: service.contact.telephone,
-      website: service.WebAddress
-    },
+    contacts: mapContacts(service),
     location: mapLocation(service),
-    serviceDetails: nonCore.getServiceDetails(service.nonCoreElements),
-    generalNotes: nonCore.getGeneralNotes(service.nonCoreElements),
-    openingTimes: nonCore.getOpeningTimes(service.nonCoreElements),
-    venueType: nonCore.getVenueType(service.nonCoreElements)
+    serviceDetails: mapNonCore.getServiceDetails(service.nonCoreElements),
+    generalNotes: mapNonCore.getGeneralNotes(service.nonCoreElements),
+    openingTimes: mapNonCore.getOpeningTimes(service.nonCoreElements),
+    venueType: mapNonCore.getVenueType(service.nonCoreElements)
   };
 }
 
