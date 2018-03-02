@@ -11,6 +11,8 @@ services:
       AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
       CONTAINER_NAME: ${CONTAINER_NAME}
       SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+      API_URL: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
+      OUTPUT_FILE: shis-data
 
   etl:
     extends:

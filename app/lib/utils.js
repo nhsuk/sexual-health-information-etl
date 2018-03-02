@@ -19,7 +19,7 @@ function getDuplicates(arr) {
 }
 
 function getId(field) {
-  return field && field.split('/').pop();
+  return field && `${config.outputFile}-${field.split('/').pop()}`;
 }
 
 module.exports = {

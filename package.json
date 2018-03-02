@@ -17,7 +17,7 @@
     "postrewrite": "yarn git-hook",
     "precommit": "yarn git-hook",
     "prepush": "yarn git-hook && yarn snyk test",
-    "start": "node schedule.js",
+    "start": "node app.js",
     "test": "NODE_ENV=test mocha --recursive test",
     "test-ci": "yarn lint && yarn coverage-generate && yarn coverage-check && yarn coverage-upload-coveralls",
     "test-integration": "NODE_ENV=test mocha --recursive test/integration",

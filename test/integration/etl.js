@@ -59,7 +59,7 @@ describe('ETL', function test() {
 
   it('should update all if no previous data available', async () => {
     const lastModifiedDate = moment('20180220', 'YYYYMMDD');
-    const ids = ['19708356', '19690074'];
+    const ids = [`${config.outputFile}-19708356`, `${config.outputFile}-19690074`];
     const data = [];
     const dataDate = undefined;
     const dataService = mockDataService(data, dataDate, true);
@@ -76,7 +76,7 @@ describe('ETL', function test() {
 
   it('should only update if changed record', async () => {
     const lastModifiedDate = moment('20180220', 'YYYYMMDD');
-    const ids = ['19708356', '19690074'];
+    const ids = [`${config.outputFile}-19708356`, `${config.outputFile}-19690074`];
     const data = [
       { id: ids[0], name: 'One' },
       { id: ids[1], name: 'Two' },

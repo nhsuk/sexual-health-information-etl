@@ -5,10 +5,10 @@ const config = {
   hitsPerHour: process.env.HITS_PER_HOUR || 20000,
   saveEvery: 100,
   outputDir: './output',
-  outputFile: 'shis-data',
+  outputFile: process.env.OUTPUT_FILE || 'shis-data',
   idListFile: 'ids',
   containerName: process.env.CONTAINER_NAME || 'etl-output',
-  syndicationApiUrl: 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport',
+  syndicationApiUrl: process.env.API_URL || 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport',
 };
 
 module.exports = config;
