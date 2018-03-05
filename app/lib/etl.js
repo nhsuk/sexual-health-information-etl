@@ -45,8 +45,8 @@ function startPopulateRecordsFromIdsQueue() {
 async function loadLatestEtlData() {
   const { data, date } = await dataService.getLatestData(utils.getMajorMinorVersion());
   if (date) {
-    log.info(`Last ${utils.getMajorMinorVersion()} data uploaded on ${etlStore.getLastRunDate()}`);
     etlStore.setLastRunDate(date);
+    log.info(`Last ${utils.getMajorMinorVersion()} data uploaded on ${etlStore.getLastRunDate()}`);
     data.map(etlStore.addRecord);
   }
 }

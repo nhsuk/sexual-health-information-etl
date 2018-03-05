@@ -22,10 +22,15 @@ function getId(field) {
   return field && `${config.outputFile}-${field.split('/').pop()}`;
 }
 
+function getSyndicationId(id) {
+  return id.replace(`${config.outputFile}-`, '');
+}
+
 module.exports = {
   asArray,
   getDuplicates,
   getFilePrefix,
   getId,
   getMajorMinorVersion,
+  getSyndicationId,
 };

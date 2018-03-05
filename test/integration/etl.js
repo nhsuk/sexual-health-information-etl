@@ -8,6 +8,7 @@ const expect = chai.expect;
 const etl = require('../../app/lib/etl');
 const etlStore = require('../../app/lib/etl-toolkit/etlStore');
 const config = require('../../app/lib/config');
+const utils = require('../../app/lib/utils');
 
 function mockDataService(data, date, expectUpload) {
   return {
@@ -50,10 +51,6 @@ function stubModifiedRecords(date) {
   stubResults('test/resources/modified-records.xml', date);
 }
 
-function stubNoModifiedRecords(date) {
-  stubNoResults(date);
-}
-
 describe('ETL', function test() {
   this.timeout(5000);
 
@@ -65,8 +62,8 @@ describe('ETL', function test() {
     const dataService = mockDataService(data, dataDate, true);
 
     stubModifiedRecords(lastModifiedDate);
-    stubServiceLookup('test/resources/service-one.xml', ids[0]);
-    stubServiceLookup('test/resources/service-two.xml', ids[1]);
+    stubServiceLookup('test/resources/service-one.xml', utils.getSyndicationId(ids[0]));
+    stubServiceLookup('test/resources/service-two.xml', utils.getSyndicationId(ids[1]));
 
     await etl.start(dataService);
     expect(etlStore.getRecords().length).to.equal(2);
@@ -84,8 +81,8 @@ describe('ETL', function test() {
     const dataDate = lastModifiedDate;
     const dataService = mockDataService(data, dataDate, true);
     stubModifiedRecords(lastModifiedDate);
-    stubServiceLookup('test/resources/service-one.xml', ids[0]);
-    stubServiceLookup('test/resources/service-two.xml', ids[1]);
+    stubServiceLookup('test/resources/service-one.xml', utils.getSyndicationId(ids[0]));
+    stubServiceLookup('test/resources/service-two.xml', utils.getSyndicationId(ids[1]));
 
     await etl.start(dataService);
     expect(etlStore.getRecords().length).to.equal(2);
@@ -97,7 +94,7 @@ describe('ETL', function test() {
     const lastModifiedDate = moment('20180220', 'YYYYMMDD');
     const data = [];
     const dataDate = lastModifiedDate;
-    stubNoModifiedRecords(lastModifiedDate);
+    stubNoResults(lastModifiedDate);
     await etl.start(mockDataService(data, dataDate, false));
     expect(etlStore.getRecords().length).to.equal(0);
   });
