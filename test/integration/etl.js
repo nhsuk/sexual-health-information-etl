@@ -33,7 +33,14 @@ function stubNoResults(date) {
   const url = `/modifiedsince/${date.year()}/${date.month() + 1}/${date.date()}.xml?apikey=${process.env.SYNDICATION_API_KEY}&page=1`;
   nock(config.syndicationApiUrl)
     .get(url)
-    .reply(404, 'Error: Failed to load page, status code:  404');
+    .reply(404, 'Error: Failed to load page, status code: 404');
+}
+
+function stubResultsError(date) {
+  const url = `/modifiedsince/${date.year()}/${date.month() + 1}/${date.date()}.xml?apikey=${process.env.SYNDICATION_API_KEY}&page=1`;
+  nock(config.syndicationApiUrl)
+    .get(url)
+    .reply(500, 'Error: syndication is down');
 }
 
 function stubServiceLookup(filePath, odsCode) {
@@ -78,8 +85,7 @@ describe('ETL', function test() {
       { id: ids[0], name: 'One' },
       { id: ids[1], name: 'Two' },
     ];
-    const dataDate = lastModifiedDate;
-    const dataService = mockDataService(data, dataDate, true);
+    const dataService = mockDataService(data, lastModifiedDate, true);
     stubModifiedRecords(lastModifiedDate);
     stubServiceLookup('test/resources/service-one.xml', utils.getSyndicationId(ids[0]));
     stubServiceLookup('test/resources/service-two.xml', utils.getSyndicationId(ids[1]));
@@ -91,12 +97,23 @@ describe('ETL', function test() {
   });
 
   it('should take no action if no modified records', async () => {
+    const lastModifiedDate = moment('20180222', 'YYYYMMDD');
+    const data = [];
+    stubNoResults(lastModifiedDate);
+    await etl.start(mockDataService(data, lastModifiedDate, false));
+    expect(etlStore.getRecords().length).to.equal(0);
+  });
+
+  it('should throw exception if syndication is down', async () => {
     const lastModifiedDate = moment('20180220', 'YYYYMMDD');
     const data = [];
-    const dataDate = lastModifiedDate;
-    stubNoResults(lastModifiedDate);
-    await etl.start(mockDataService(data, dataDate, false));
-    expect(etlStore.getRecords().length).to.equal(0);
+    stubResultsError(lastModifiedDate);
+    try {
+      await etl.start(mockDataService(data, lastModifiedDate, false));
+      chai.assert.fail('should have thrown exception');
+    } catch (ex) {
+      expect(ex.message).to.equal('Failed to load page, status code:  500');
+    }
   });
 
   afterEach(() => {

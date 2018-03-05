@@ -9,7 +9,7 @@ const outputFile = `${config.outputDir}/${config.outputFile}.json`;
 const summaryFile = `${config.outputDir}/summary.json`;
 
 async function getLatestDataBlob(version) {
-  const filter = b => b.name.startsWith(`${utils.getFilePrefix()}${config.outputFile}-`) && b.name.endsWith(`${version}.json`);
+  const filter = b => b.name.startsWith(`${config.outputFile}-`) && b.name.endsWith(`${version}.json`);
   return azureService.getLatestBlob(filter);
 }
 
@@ -37,11 +37,11 @@ function getSuffix() {
 
 async function uploadData() {
   log.info(`Overwriting '${config.outputFile}' in Azure`);
-  await azureService.uploadToAzure(outputFile, `${utils.getFilePrefix()}${config.outputFile}.json`);
+  await azureService.uploadToAzure(outputFile, `${config.outputFile}.json`);
   log.info(`Saving date stamped version of '${config.outputFile}' in Azure`);
-  await azureService.uploadToAzure(outputFile, `${utils.getFilePrefix()}${config.outputFile}${getSuffix()}`);
+  await azureService.uploadToAzure(outputFile, `${config.outputFile}${getSuffix()}`);
   log.info('Saving summary file in Azure');
-  await azureService.uploadToAzure(summaryFile, `${utils.getFilePrefix()}summary${getSuffix()}`);
+  await azureService.uploadToAzure(summaryFile, `${config.outputFile}-summary${getSuffix()}`);
 }
 
 module.exports = {

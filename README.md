@@ -38,7 +38,7 @@ The ETL version is included along with a timestamp to enable a full rescan if th
 
 Once the initial scan is complete, failed records will be revisited. IDs for records still failing after the second attempt are listed in a `summary.json` file.
 
-Running `scripts/start` will bring up a docker containerand initiate the scrape.
+Running `scripts/start` will bring up a docker containerand initiate the scrape. 
 
 A successful scrape will result in the file `shis-data.json` being written to the `output` folder and to the Azure storage location specified in the environmental variables.
 
@@ -50,13 +50,14 @@ The files uploaded to Azure Blob Storage are:
 
 `shis-data.json`
 
- where `YYYYMMDD` is the current year, month and date, and `VERSION` is the current major version of the ETL as defined in the `package.json`.
+where `YYYYMMDD` is the current year, month and date, and `VERSION` is the current major version of the ETL as defined in the `package.json`.
 
-The ETL may also be run locally with `yarn start`.
+**Note:** when run locally inside the docker container the output file will be `dev-shis-data` rather than `shis-data` to prevent the `shis-data.json` file in azure
+from being overwritten during the development cycle.
 
 The output JSON will be an array of objects in the format shown in the [Sample SHIS Data](sample-shis-data.json)
 
-Most of the fields are self explanatory, the three that require further explanation are `id`, `location`, and `venueType`.
+Most of the fields are self-explanatory, the three that require further explanation are `id`, `location`, and `venueType`.
 
 `id` is only used internally. This is the ID retrieved from Serco with the filename prefixed to avoid collisions, i.e. `shis-data-19595086`.
 
@@ -102,7 +103,7 @@ environment.
 | `NODE_ENV`                         | node environment                                                                                            | development            |          |
 | `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                        | yes      |
 | `API_URL`                          | URL to Syndicate service to scrape                                                                          | http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport | no      |
-| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data              | no      |
+| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data              | no       |
 
 ## FAQ
 

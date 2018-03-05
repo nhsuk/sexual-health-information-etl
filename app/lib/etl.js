@@ -59,28 +59,31 @@ async function etl(dataServiceIn) {
   await loadLatestEtlData();
 
   // only one page of results despite there being over 800 records
-  const pageIds = await getModifiedIds(etlStore.getLastRunDate(), 1);
-  log.info(`Total ids: ${pageIds.length}`);
-  if (pageIds.length === 0) {
-    log.info('No modified records, exiting');
-    if (resolvePromise) {
-      resolvePromise();
+  try {
+    const pageIds = await getModifiedIds(etlStore.getLastRunDate(), 1);
+    log.info(`Total ids: ${pageIds.length}`);
+    if (pageIds.length === 0) {
+      log.info('No modified records, exiting');
+      if (resolvePromise) {
+        resolvePromise();
+      }
+    } else {
+      etlStore.addIds(pageIds);
+      pageIds.forEach(etlStore.deleteRecord);
+      startPopulateRecordsFromIdsQueue();
     }
-  } else {
-    etlStore.addIds(pageIds);
-    pageIds.forEach(etlStore.deleteRecord);
-    startPopulateRecordsFromIdsQueue();
+  } catch (ex) {
+    throw ex;
   }
 }
 
 function start(dataServiceIn) {
   return new Promise((resolve, reject) => {
-    try {
-      etl(dataServiceIn);
-    } catch (ex) {
+    etl(dataServiceIn).catch((ex) => {
       log.error(ex);
       reject(ex);
-    }
+    });
+
     resolvePromise = () => {
       resolve();
     };
