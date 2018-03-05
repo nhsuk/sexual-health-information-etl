@@ -34,7 +34,7 @@
           "rel": "self",
           "type": "application/xml",
           "title": "NHS Choices - 56 Dean Street Express",
-          "href": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=bbccdd"
+          "href": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=changeme"
         }
       },
       {
@@ -70,7 +70,7 @@
           "$": {
             "rel": "self",
             "title": "56 Dean Street Express",
-            "href": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=bbccdd"
+            "href": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=changeme"
           }
         },
         {

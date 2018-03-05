@@ -43,10 +43,10 @@ function stubResultsError(date) {
     .reply(500, 'Error: syndication is down');
 }
 
-function stubServiceLookup(filePath, odsCode) {
+function stubServiceLookup(filePath, id) {
   const stubbedData = readFile(filePath);
   nock(config.syndicationApiUrl)
-    .get(`/${odsCode}.xml?apikey=${process.env.SYNDICATION_API_KEY}`)
+    .get(`/${id}.xml?apikey=${process.env.SYNDICATION_API_KEY}`)
     .reply(200, stubbedData);
 }
 

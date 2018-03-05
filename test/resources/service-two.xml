@@ -12,7 +12,7 @@
     <uri>http://www.nhs.uk</uri>
     <email>webservices@nhschoices.nhs.uk</email>
   </author>
-  <link rel="self" type="application/xml" title="NHS Choices - Acorn" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074?apikey=bbccdd" />
+  <link rel="self" type="application/xml" title="NHS Choices - Acorn" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074?apikey=changeme" />
   <link rel="alternate" title="NHS Choices - Acorn" href="http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=8969117" />
   <tracking 
     xmlns="http://syndication.nhschoices.nhs.uk/services">&lt;img style="border: 0; width: 1px; height: 1px;" alt="" src="http://statse.webtrendslive.com/dcss9yzisf9xjyg74mgbihg8p_8d2u/njs.gif?dcsuri=/services%2ftypes%2fsexualhealthinformationandsupport%2f19690074&amp;amp;wt.js=no&amp;amp;wt.cg_n=syndication"/&gt;
@@ -24,7 +24,7 @@
     <id>http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074</id>
     <title type="text">Acorn</title>
     <updated>2018-03-01T11:06:11Z</updated>
-    <link rel="self" title="Acorn" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074?apikey=bbccdd" />
+    <link rel="self" title="Acorn" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074?apikey=changeme" />
     <link rel="alternate" title="Acorn" href="http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=8969117" />
     <content type="application/xml">
       <s:service 

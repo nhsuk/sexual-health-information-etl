@@ -5,41 +5,41 @@ const etlStore = require('../../app/lib/etl-toolkit/etlStore');
 
 const expect = chai.expect;
 
-const odsCode1 = 'FP1';
-const odsCode2 = 'FP2';
-const odsCode3 = 'FP3';
+const serviceId1 = 'FP1';
+const serviceId2 = 'FP2';
+const serviceId3 = 'FP3';
 
-function getPharmacyAction(odsCode) {
+function getServiceAction(serviceId) {
   return new Promise((resolve) => {
-    resolve({ id: odsCode });
+    resolve({ id: serviceId });
   });
 }
 
-function getPharmacyWithErrorAction(odsCode) {
+function getServiceWithErrorAction(serviceId) {
   return new Promise((resolve) => {
-    if (odsCode === odsCode2) {
+    if (serviceId === serviceId2) {
       throw new Error('error in json');
     } else {
-      resolve({ id: odsCode });
+      resolve({ id: serviceId });
     }
   });
 }
 
-describe('Populate ID queue', () => {
+describe('Populate Records from IDs queue', () => {
   beforeEach(() => {
     etlStore.clearState();
   });
 
-  it('should populate etlStore with pharmacy records', (done) => {
-    etlStore.addIds([odsCode1, odsCode2, odsCode3]);
+  it('should populate etlStore with records', (done) => {
+    etlStore.addIds([serviceId1, serviceId2, serviceId3]);
     const options = {
       workers: 1,
-      populateRecordAction: getPharmacyAction,
+      populateRecordAction: getServiceAction,
       queueComplete: () => {
         /* eslint-disable no-underscore-dangle */
-        expect(etlStore.getRecord(odsCode1).id).to.equal(odsCode1);
-        expect(etlStore.getRecord(odsCode2).id).to.equal(odsCode2);
-        expect(etlStore.getRecord(odsCode3).id).to.equal(odsCode3);
+        expect(etlStore.getRecord(serviceId1).id).to.equal(serviceId1);
+        expect(etlStore.getRecord(serviceId2).id).to.equal(serviceId2);
+        expect(etlStore.getRecord(serviceId3).id).to.equal(serviceId3);
         expect(etlStore.getErorredIds().length).to.equal(0);
         expect(etlStore.getRecords().length).to.equal(3);
         /* eslint-enable no-underscore-dangle */
@@ -53,7 +53,7 @@ describe('Populate ID queue', () => {
     etlStore.addIds([]);
     const options = {
       workers: 1,
-      populateRecordAction: getPharmacyAction,
+      populateRecordAction: getServiceAction,
       queueComplete: () => {
         done();
       },
@@ -62,15 +62,15 @@ describe('Populate ID queue', () => {
   });
 
   it('should skip duplicate IDs', (done) => {
-    etlStore.addIds([odsCode1, odsCode2, odsCode3, odsCode1]);
+    etlStore.addIds([serviceId1, serviceId2, serviceId3, serviceId1]);
     const options = {
       workers: 1,
-      populateRecordAction: getPharmacyAction,
+      populateRecordAction: getServiceAction,
       queueComplete: () => {
         /* eslint-disable no-underscore-dangle */
-        expect(etlStore.getRecord(odsCode1).id).to.equal(odsCode1);
-        expect(etlStore.getRecord(odsCode2).id).to.equal(odsCode2);
-        expect(etlStore.getRecord(odsCode3).id).to.equal(odsCode3);
+        expect(etlStore.getRecord(serviceId1).id).to.equal(serviceId1);
+        expect(etlStore.getRecord(serviceId2).id).to.equal(serviceId2);
+        expect(etlStore.getRecord(serviceId3).id).to.equal(serviceId3);
         expect(etlStore.getErorredIds().length).to.equal(0);
         expect(etlStore.getRecords().length).to.equal(3);
         /* eslint-enable no-underscore-dangle */
@@ -81,14 +81,14 @@ describe('Populate ID queue', () => {
   });
 
   it('should add failed IDs to list', (done) => {
-    etlStore.addIds([odsCode1, odsCode2, odsCode3]);
+    etlStore.addIds([serviceId1, serviceId2, serviceId3]);
     const options = {
       workers: 1,
-      populateRecordAction: getPharmacyWithErrorAction,
+      populateRecordAction: getServiceWithErrorAction,
       queueComplete: () => {
         /* eslint-disable no-underscore-dangle */
-        expect(etlStore.getRecord(odsCode1).id).to.equal(odsCode1);
-        expect(etlStore.getRecord(odsCode3).id).to.equal(odsCode3);
+        expect(etlStore.getRecord(serviceId1).id).to.equal(serviceId1);
+        expect(etlStore.getRecord(serviceId3).id).to.equal(serviceId3);
         expect(etlStore.getRecords().length).to.equal(2);
         expect(etlStore.getErorredIds().length).to.equal(1);
         /* eslint-enable no-underscore-dangle */
@@ -99,15 +99,15 @@ describe('Populate ID queue', () => {
   });
 
   it('starting retry queue should retry failed IDs and remove from the list if successful', (done) => {
-    etlStore.addIds([odsCode1, odsCode2, odsCode3]);
+    etlStore.addIds([serviceId1, serviceId2, serviceId3]);
 
     const retryOptions = {
       workers: 1,
-      populateRecordAction: getPharmacyAction,
+      populateRecordAction: getServiceAction,
       queueComplete: () => {
         /* eslint-disable no-underscore-dangle */
-        expect(etlStore.getRecord(odsCode1).id).to.equal(odsCode1);
-        expect(etlStore.getRecord(odsCode3).id).to.equal(odsCode3);
+        expect(etlStore.getRecord(serviceId1).id).to.equal(serviceId1);
+        expect(etlStore.getRecord(serviceId3).id).to.equal(serviceId3);
         expect(etlStore.getRecords().length).to.equal(3);
         expect(etlStore.getErorredIds().length).to.equal(0);
         /* eslint-enable no-underscore-dangle */
@@ -117,7 +117,7 @@ describe('Populate ID queue', () => {
 
     const options = {
       workers: 1,
-      populateRecordAction: getPharmacyWithErrorAction,
+      populateRecordAction: getServiceWithErrorAction,
       queueComplete: () => {
         expect(etlStore.getRecords().length).to.equal(2);
         expect(etlStore.getErorredIds().length).to.equal(1);

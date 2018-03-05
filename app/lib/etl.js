@@ -57,23 +57,18 @@ async function etl(dataServiceIn) {
   // set initial date to last known run date
   etlStore.setLastRunDate(moment('2018-02-20'));
   await loadLatestEtlData();
-
   // only one page of results despite there being over 800 records
-  try {
-    const pageIds = await getModifiedIds(etlStore.getLastRunDate(), 1);
-    log.info(`Total ids: ${pageIds.length}`);
-    if (pageIds.length === 0) {
-      log.info('No modified records, exiting');
-      if (resolvePromise) {
-        resolvePromise();
-      }
-    } else {
-      etlStore.addIds(pageIds);
-      pageIds.forEach(etlStore.deleteRecord);
-      startPopulateRecordsFromIdsQueue();
+  const pageIds = await getModifiedIds(etlStore.getLastRunDate(), 1);
+  log.info(`Total ids: ${pageIds.length}`);
+  if (pageIds.length === 0) {
+    log.info('No modified records, exiting');
+    if (resolvePromise) {
+      resolvePromise();
     }
-  } catch (ex) {
-    throw ex;
+  } else {
+    etlStore.addIds(pageIds);
+    pageIds.forEach(etlStore.deleteRecord);
+    startPopulateRecordsFromIdsQueue();
   }
 }
 
