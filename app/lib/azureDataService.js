@@ -4,13 +4,13 @@ const fsHelper = require('./fsHelper');
 const log = require('./logger');
 const moment = require('moment');
 const utils = require('./utils');
+const createFileVersionFilter = require('./createFileVersionFilter');
 
 const outputFile = `${config.outputDir}/${config.outputFile}.json`;
 const summaryFile = `${config.outputDir}/summary.json`;
 
 async function getLatestDataBlob(version) {
-  const filter = b => b.name.startsWith(`${config.outputFile}-`) && b.name.endsWith(`${version}.json`);
-  return azureService.getLatestBlob(filter);
+  return azureService.getLatestBlob(createFileVersionFilter(config.outputFile, version));
 }
 
 async function getLatestData(version) {
