@@ -16,10 +16,10 @@ function mapService(rawService) {
     },
     contacts: mapContacts(service),
     location: mapLocation(service),
-    serviceDetails: mapNonCore.getServiceDetails(service.nonCoreElements),
-    generalNotes: mapNonCore.getGeneralNotes(service.nonCoreElements),
-    openingTimes: mapNonCore.getOpeningTimes(service.nonCoreElements),
-    venueType: mapNonCore.getVenueType(service.nonCoreElements)
+    serviceDetails: mapNonCore.serviceDetails(service.nonCoreElements),
+    generalNotes: mapNonCore.generalNotes(service.nonCoreElements),
+    openingTimes: mapNonCore.openingTimes(service.nonCoreElements),
+    venueType: mapNonCore.venueType(service.nonCoreElements)
   };
 }
 

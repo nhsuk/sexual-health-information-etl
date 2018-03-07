@@ -6,29 +6,29 @@ function getElements(nonCoreElements) {
 }
 
 function getElement(nonCoreElements, title) {
-  const serviceDetails = getElements(nonCoreElements).find(el => el.elementTitle === title);
-  return serviceDetails ? serviceDetails.elementText : undefined;
+  const element = getElements(nonCoreElements).find(el => el.elementTitle === title);
+  return element ? element.elementText : undefined;
 }
 
-function getServiceDetails(nonCoreElements) {
+function serviceDetails(nonCoreElements) {
   return getElement(nonCoreElements, 'Service details');
 }
 
-function getGeneralNotes(nonCoreElements) {
+function generalNotes(nonCoreElements) {
   return getElement(nonCoreElements, 'General notes');
 }
 
-function getOpeningTimes(nonCoreElements) {
+function openingTimes(nonCoreElements) {
   return getElement(nonCoreElements, 'Opening times');
 }
 
-function getVenueType(nonCoreElements) {
+function venueType(nonCoreElements) {
   return getElement(nonCoreElements, 'Venue Type');
 }
 
 module.exports = {
-  getGeneralNotes,
-  getOpeningTimes,
-  getServiceDetails,
-  getVenueType
+  generalNotes,
+  openingTimes,
+  serviceDetails,
+  venueType
 };

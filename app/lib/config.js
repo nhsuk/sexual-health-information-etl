@@ -8,7 +8,7 @@ const config = {
   outputFile: process.env.OUTPUT_FILE || 'shis-data',
   idListFile: 'ids',
   containerName: process.env.CONTAINER_NAME || 'etl-output',
-  syndicationApiUrl: process.env.API_URL || 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport',
+  syndicationApiUrl: process.env.SYNDICATION_SERVICE_END_POINT || 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport',
 };
 
 module.exports = config;

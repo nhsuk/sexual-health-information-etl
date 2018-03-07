@@ -19,5 +19,6 @@ Starts the application in a Docker container.
 [`test`](test)
 Starts a Docker container specifically for continually running tests.
 
-[`ci-deployment`](ci-deployment)
-Infrastructure related work.
+[`test-ci`](test-ci)
+Starts a Docker container specifically for continually running tests during continuous integration.
+

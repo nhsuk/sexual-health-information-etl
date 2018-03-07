@@ -1,4 +1,4 @@
-# sexual-health-information-etl
+# Sexual Health Information ETL
 > ETL to retrieve sexual health information and support services from syndication and store as JSON
 
 [![GitHub Release](https://img.shields.io/github/release/nhsuk/sexual-health-information-etl.svg)](https://github.com/nhsuk/sexual-health-information-etl/releases/latest/)
@@ -31,14 +31,15 @@ The output is uploaded to Azure Blob Storage, a suitable connection string shoul
 For further details see [Azure Blob Storage](https://azure.microsoft.com/en-gb/services/storage/blobs/).
 
 The ETL retrieves all the Sexual Health and Information Services from the Syndication API via the `modifiedsince` end point.
-Serco reload all the data when a change is made, so the `modifiedsince` end point will contain all records.
+Serco reload all the data with new IDs when a change is made, so the `modifiedsince` end point will contain all records. An incremental update approach is not possible due to the changing IDs.
 
-The date of the most recently modified file in blob storage beginning `shis-data` is used as the last run date.
-If no file is present the last known good run date of `20/02/18` will be used.
+The date of the most recently modified file in blob storage beginning `shis-data`[<sup>*</sup>](#development-notes) is used as the last run date.
+
+If no file is present the last known good run date of `20/02/2018` will be used.
 
 The ETL will exit if the `modifiedsince` end point contains no records, or returns a `404` error.
 
-The ETL version from the [package.json](package.json) is included along with a timestamp to enable a full rescan if the data
+The ETL version from the [package.json](package.json) is included along with a datestamp to enable a full rescan if the data
 structure changes, as this will be reflected in the application version.
 
 Once the initial scan is complete, failed records will be revisited. IDs for records still failing after the second attempt
@@ -46,29 +47,31 @@ are listed in a `summary.json` file.
 
 Running `scripts/start` will bring up a docker container and initiate the scrape.
 
-A successful scrape will result in the file `shis-data.json` being written to the `output` folder and to the Azure Blob Storage
+A successful scrape will result in the file `shis-data.json`[<sup>*</sup>](#development-notes) being written to the `output` folder and to the Azure Blob Storage
 location specified in the environmental variables.
 
 The files uploaded to Azure Blob Storage are:
 
-`shis-data-summary-YYYYMMDD-VERSION.json`
+`shis-data-summary-YYYYMMDD-VERSION.json`[<sup>*</sup>](#development-notes)
 
-`shis-data-YYYYMMDD-VERSION.json`
+`shis-data-YYYYMMDD-VERSION.json`[<sup>*</sup>](#development-notes)
 
-`shis-data.json`
+`shis-data.json`[<sup>*</sup>](#development-notes)
 
 where `YYYYMMDD` is the current year, month and date, and `VERSION` is the current major version of the ETL as defined in the `package.json`.
 
-**Note:** The output file has been set to `dev-shis-data` in the development Docker compose file.
-This ensures that during development the output file will not overwrite the production `shis-data.json` file in Azure.
-
+### Development Notes
+The output file has been set to `dev-shis-data` in the development Docker compose file.
+This ensures that during development the output files will all include a `dev-` prefix
+so as not overwrite the production `shis-data` files in Azure.
 
 ## Structure of JSON Data
 
 The output JSON will be an array of objects in the format shown in the [Sample SHIS Data](sample-shis-data.json) file.
 Most of the fields are self-explanatory, the three that require further explanation are `id`, `location`, and `venueType`.
 
-`id` is only used internally. This is the ID retrieved from Serco with the filename prefixed to avoid collisions, i.e. `shis-data-19595086`.
+`id` is only used internally. This is the Serco ID retrieved from Syndication with the filename prefixed to avoid collisions, i.e. `shis-data-19595086`.
+The Serco ID for a record may change when data is updated.
 
 Location is in [GeoJSON](http://geojson.org/) format.
 
@@ -78,13 +81,6 @@ Location is in [GeoJSON](http://geojson.org/) format.
 
 As the application is being developed, every Pull Request has its own test
 environment automatically built and deployed to.
-
-Every environment apart from the one we want the public to access requires
-basic authentication to access. The username and password are not secret, in
-fact they are included within environment variable table below.
-The intention with the authentication challenge is to prevent people whom may
-stumble across the site and not realise it is for testing, it also prevents
-access by search engines and other bots.
 
 ## Environment variables
 
@@ -111,7 +107,7 @@ environment.
 | `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)                                                   | Depends on `NODE_ENV`  |          |
 | `NODE_ENV`                         | node environment                                                                                            | development            |          |
 | `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                        | yes      |
-| `API_URL`                          | URL to Syndicate service to scrape                                                                          | http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport | no      |
+| `SYNDICATION_SERVICE_END_POINT`    | URL to Syndicate service to scrape                                                                          | http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport | no      |
 | `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data              | no       |
 
 ## FAQ

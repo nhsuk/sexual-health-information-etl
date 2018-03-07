@@ -10,7 +10,7 @@ describe('mapNonCoreElements', () => {
     const nonCoreElements = {
       nonCoreElement: [{ elementTitle, elementText }]
     };
-    const result = mapNonCoreElements.getServiceDetails(nonCoreElements);
+    const result = mapNonCoreElements.serviceDetails(nonCoreElements);
     expect(result).to.equal(elementText);
   });
 
@@ -20,7 +20,7 @@ describe('mapNonCoreElements', () => {
     const nonCoreElements = {
       nonCoreElement: [{ elementTitle, elementText }]
     };
-    const result = mapNonCoreElements.getGeneralNotes(nonCoreElements);
+    const result = mapNonCoreElements.generalNotes(nonCoreElements);
     expect(result).to.equal(elementText);
   });
 
@@ -30,7 +30,7 @@ describe('mapNonCoreElements', () => {
     const nonCoreElements = {
       nonCoreElement: [{ elementTitle, elementText }]
     };
-    const result = mapNonCoreElements.getOpeningTimes(nonCoreElements);
+    const result = mapNonCoreElements.openingTimes(nonCoreElements);
     expect(result).to.equal(elementText);
   });
 
@@ -40,14 +40,14 @@ describe('mapNonCoreElements', () => {
     const nonCoreElements = {
       nonCoreElement: [{ elementTitle, elementText }]
     };
-    const result = mapNonCoreElements.getVenueType(nonCoreElements);
+    const result = mapNonCoreElements.venueType(nonCoreElements);
     expect(result).to.equal(elementText);
   });
 
   it('should gracefully handle missing elements', () => {
     const nonCoreElements = {
     };
-    const result = mapNonCoreElements.getServiceDetails(nonCoreElements);
+    const result = mapNonCoreElements.serviceDetails(nonCoreElements);
     expect(result).to.be.undefined;
   });
 });
