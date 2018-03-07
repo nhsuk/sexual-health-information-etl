@@ -29,8 +29,13 @@ function getModifiedSincePage(moment, page) {
   return apiRequest(url).then(xmlParser).then(rejectHtml);
 }
 
+function getAllPage() {
+  const url = `${config.syndicationApiUrl}/all.xml?apikey=${API_KEY}`;
+  return apiRequest(url).then(xmlParser).then(rejectHtml);
+}
+
 module.exports = {
-  SYNDICATION_HTML_PAGE_ERROR,
+  getAllPage,
   getPage,
   getModifiedSincePage,
 };

@@ -21,10 +21,14 @@ function readFile(path) {
 }
 
 function stubResults(filePath, date) {
-  const url = `/modifiedsince/${date.year()}/${date.month() + 1}/${date.date()}.xml?apikey=${process.env.SYNDICATION_API_KEY}&page=1`;
   const stubbedData = readFile(filePath);
+  const url = `/modifiedsince/${date.year()}/${date.month() + 1}/${date.date()}.xml?apikey=${process.env.SYNDICATION_API_KEY}&page=1`;
   nock(config.syndicationApiUrl)
     .get(url)
+    .reply(200, stubbedData);
+  const allUrl = `/all.xml?apikey=${process.env.SYNDICATION_API_KEY}`;
+  nock(config.syndicationApiUrl)
+    .get(allUrl)
     .reply(200, stubbedData);
 }
 

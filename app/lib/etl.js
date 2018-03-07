@@ -1,6 +1,7 @@
 const moment = require('moment');
 const etlStore = require('./etl-toolkit/etlStore');
-const getModifiedIds = require('./actions/getModifiedIds');
+const getAllIDs = require('./actions/getAllIDs');
+const dataUpdated = require('./actions/dataUpdated');
 const getService = require('./actions/getService');
 const populateRecordsFromIdsQueue = require('./etl-toolkit/queues/populateRecordsFromIds');
 const utils = require('./utils');
@@ -57,18 +58,19 @@ async function etl(dataServiceIn) {
   // set initial date to last known run date
   etlStore.setLastRunDate(moment('2018-02-20'));
   await loadLatestEtlData();
-  // only one page of results despite there being over 800 records
-  const pageIds = await getModifiedIds(etlStore.getLastRunDate(), 1);
-  log.info(`Total ids: ${pageIds.length}`);
-  if (pageIds.length === 0) {
+
+  if (await dataUpdated(etlStore.getLastRunDate())) {
+    // only one page of results despite there being over 800 records
+    const pageIds = await getAllIDs();
+    log.info(`Total ids: ${pageIds.length}`);
+    etlStore.addIds(pageIds);
+    pageIds.forEach(etlStore.deleteRecord);
+    startPopulateRecordsFromIdsQueue();
+  } else {
     log.info('No modified records, exiting');
     if (resolvePromise) {
       resolvePromise();
     }
-  } else {
-    etlStore.addIds(pageIds);
-    pageIds.forEach(etlStore.deleteRecord);
-    startPopulateRecordsFromIdsQueue();
   }
 }
 
