@@ -8,7 +8,6 @@ const expect = chai.expect;
 const etl = require('../../app/lib/etl');
 const etlStore = require('../../app/lib/etl-toolkit/etlStore');
 const config = require('../../app/lib/config');
-const utils = require('../../app/lib/utils');
 
 function mockDataService(data, date, expectUpload) {
   return {
@@ -63,14 +62,14 @@ describe('ETL', function test() {
 
   it('should update all if no previous data available', async () => {
     const lastModifiedDate = moment('20180220', 'YYYYMMDD');
-    const ids = [`${config.outputFile}-19708356`, `${config.outputFile}-19690074`];
+    const ids = ['19708356', '19690074'];
     const data = [];
     const dataDate = undefined;
     const dataService = mockDataService(data, dataDate, true);
 
     stubModifiedRecords(lastModifiedDate);
-    stubServiceLookup('test/resources/service-one.xml', utils.getSyndicationId(ids[0]));
-    stubServiceLookup('test/resources/service-two.xml', utils.getSyndicationId(ids[1]));
+    stubServiceLookup('test/resources/service-one.xml', ids[0]);
+    stubServiceLookup('test/resources/service-two.xml', ids[1]);
 
     await etl.start(dataService);
     expect(etlStore.getRecords().length).to.equal(2);
@@ -80,15 +79,15 @@ describe('ETL', function test() {
 
   it('should only update if changed record', async () => {
     const lastModifiedDate = moment('20180220', 'YYYYMMDD');
-    const ids = [`${config.outputFile}-19708356`, `${config.outputFile}-19690074`];
+    const ids = ['19708356', '19690074'];
     const data = [
       { id: ids[0], name: 'One' },
       { id: ids[1], name: 'Two' },
     ];
     const dataService = mockDataService(data, lastModifiedDate, true);
     stubModifiedRecords(lastModifiedDate);
-    stubServiceLookup('test/resources/service-one.xml', utils.getSyndicationId(ids[0]));
-    stubServiceLookup('test/resources/service-two.xml', utils.getSyndicationId(ids[1]));
+    stubServiceLookup('test/resources/service-one.xml', ids[0]);
+    stubServiceLookup('test/resources/service-two.xml', ids[1]);
 
     await etl.start(dataService);
     expect(etlStore.getRecords().length).to.equal(2);

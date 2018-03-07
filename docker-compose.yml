@@ -12,7 +12,7 @@ services:
       CONTAINER_NAME: ${CONTAINER_NAME}
       SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
       SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
-      OUTPUT_FILE: dev-shis-data
+      OUTPUT_FILE: ${OUTPUT_FILE-dev-shis-data}
 
   etl:
     extends:

@@ -1,6 +1,5 @@
 const chai = require('chai');
 const mapIds = require('../../app/lib/mappers/mapIds');
-const config = require('../../app/lib/config');
 
 const expect = chai.expect;
 
@@ -16,8 +15,8 @@ describe('mapIds', () => {
 
     const ids = mapIds(results);
     expect(ids.length).to.equal(2);
-    expect(ids[0]).to.equal(`${config.outputFile}-19708356`);
-    expect(ids[1]).to.equal(`${config.outputFile}-19690074`);
+    expect(ids[0]).to.equal('19708356');
+    expect(ids[1]).to.equal('19690074');
   });
 
   it('should gracefully handle missing entries', () => {

@@ -14,11 +14,7 @@ function getDuplicates(arr) {
 }
 
 function getId(field) {
-  return field && `${config.outputFile}-${field.split('/').pop()}`;
-}
-
-function getSyndicationId(id) {
-  return id.replace(`${config.outputFile}-`, '');
+  return field && field.split('/').pop();
 }
 
 module.exports = {
@@ -26,5 +22,4 @@ module.exports = {
   getDuplicates,
   getId,
   getMajorMinorVersion,
-  getSyndicationId,
 };

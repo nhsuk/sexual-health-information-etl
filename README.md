@@ -31,7 +31,7 @@ The output is uploaded to Azure Blob Storage, a suitable connection string shoul
 For further details see [Azure Blob Storage](https://azure.microsoft.com/en-gb/services/storage/blobs/).
 
 The ETL retrieves all the Sexual Health and Information Services from the Syndication API via the `modifiedsince` end point.
-Serco reload all the data with new IDs when a change is made, so the `modifiedsince` end point will contain all records. An incremental update approach is not possible due to the changing IDs.
+All the data is reloaded with new IDs when a change is made, so the `modifiedsince` end point will contain all records. An incremental update approach is not possible due to the changing IDs.
 
 The date of the most recently modified file in blob storage beginning `shis-data`[<sup>*</sup>](#development-notes) is used as the last run date.
 
@@ -70,8 +70,8 @@ so as not overwrite the production `shis-data` files in Azure.
 The output JSON will be an array of objects in the format shown in the [Sample SHIS Data](sample-shis-data.json) file.
 Most of the fields are self-explanatory, the three that require further explanation are `id`, `location`, and `venueType`.
 
-`id` is only used internally. This is the Serco ID retrieved from Syndication with the filename prefixed to avoid collisions, i.e. `shis-data-19595086`.
-The Serco ID for a record may change when data is updated.
+`id` is only used internally. This is an ID retrieved from Syndication with the filename prefixed to avoid collisions, i.e. `shis-data-19595086`.
+The ID for a record may change when data is updated.
 
 Location is in [GeoJSON](http://geojson.org/) format.
 
