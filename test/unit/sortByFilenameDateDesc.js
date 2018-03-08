@@ -1,10 +1,9 @@
-
 const chai = require('chai');
 const sortByFilenameDateDesc = require('../../app/lib/sortByFilenameDateDesc');
 
 const expect = chai.expect;
 
-describe('sort by filename date', () => {
+describe('sort by filename date in descending order', () => {
   it('should sort by date string in name', () => {
     const files = [
       { name: 'shis-data-20180220-0.1.json' },
