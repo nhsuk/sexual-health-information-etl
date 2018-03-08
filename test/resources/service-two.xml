@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed 
+  xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">NHS Choices - Acorn</title>
+  <id>http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074</id>
+  <rights type="text">© Crown Copyright 2009</rights>
+  <updated>2018-03-01T11:06:11Z</updated>
+  <category term="Service" />
+  <logo>http://www.nhs.uk/nhscwebservices/documents/logo1.jpg</logo>
+  <author>
+    <name>NHS Choices</name>
+    <uri>http://www.nhs.uk</uri>
+    <email>webservices@nhschoices.nhs.uk</email>
+  </author>
+  <link rel="self" type="application/xml" title="NHS Choices - Acorn" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074?apikey=changeme" />
+  <link rel="alternate" title="NHS Choices - Acorn" href="http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=8969117" />
+  <tracking 
+    xmlns="http://syndication.nhschoices.nhs.uk/services">&lt;img style="border: 0; width: 1px; height: 1px;" alt="" src="http://statse.webtrendslive.com/dcss9yzisf9xjyg74mgbihg8p_8d2u/njs.gif?dcsuri=/services%2ftypes%2fsexualhealthinformationandsupport%2f19690074&amp;amp;wt.js=no&amp;amp;wt.cg_n=syndication"/&gt;
+  </tracking>
+  <complete 
+    xmlns="http://purl.org/syndication/history/1.0">
+  </complete>
+  <entry>
+    <id>http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074</id>
+    <title type="text">Acorn</title>
+    <updated>2018-03-01T11:06:11Z</updated>
+    <link rel="self" title="Acorn" href="http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074?apikey=changeme" />
+    <link rel="alternate" title="Acorn" href="http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=8969117" />
+    <content type="application/xml">
+      <s:service 
+        xmlns:s="http://syndication.nhschoices.nhs.uk/services">
+        <s:name firstLetter="A">Two</s:name>
+        <s:type firstLetter="S">Sexual health information and support</s:type>
+        <s:summaryText></s:summaryText>
+        <s:address>
+          <s:addressLine>Lummaton Cross</s:addressLine>
+          <s:addressLine>Barton</s:addressLine>
+          <s:addressLine>Torquay</s:addressLine>
+          <s:addressLine>Devon</s:addressLine>
+          <s:postcode>TQ2 8ET</s:postcode>
+        </s:address>
+        <s:contact type="General">
+          <s:telephone>01803 328 819</s:telephone>
+        </s:contact>
+        <s:longitude>-3.536649704</s:longitude>
+        <s:latitude>50.48925</s:latitude>
+        <s:thingsShouldKnow></s:thingsShouldKnow>
+        <s:SuppliedBy>Serco Global Services</s:SuppliedBy>
+        <s:SuppliedOn>2018-02-20 00:00:00Z</s:SuppliedOn>
+        <s:nonCoreElements>
+          <s:nonCoreElement>
+            <s:elementTitle>Service details</s:elementTitle>
+            <s:elementText>Information and support for young people, including sexual health information, free condoms and C-Card registration.</s:elementText>
+          </s:nonCoreElement>
+          <s:nonCoreElement>
+            <s:elementTitle>Opening times</s:elementTitle>
+            <s:elementText>Sunday to Friday 9am - 10pm Saturday 9am - 10pm  </s:elementText>
+          </s:nonCoreElement>
+          <s:nonCoreElement>
+            <s:elementTitle>Venue Type</s:elementTitle>
+            <s:elementText>Community</s:elementText>
+          </s:nonCoreElement>
+        </s:nonCoreElements>
+      </s:service>
+    </content>
+  </entry>
+</feed>

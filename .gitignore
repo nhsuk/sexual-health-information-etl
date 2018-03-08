@@ -57,3 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# ignore output files created by the ETL
+output/
+
+# ignore OSX system file
+.DS_Store
