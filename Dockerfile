@@ -4,6 +4,7 @@ ENV USERNAME nodeuser
 
 RUN adduser -D "$USERNAME" && \
     mkdir -p /code/output && \
+    mkdir -p /code/coverage && \
     chown "$USERNAME":"$USERNAME" /code
 
 USER $USERNAME
