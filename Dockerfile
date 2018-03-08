@@ -4,7 +4,6 @@ ENV USERNAME nodeuser
 
 RUN adduser -D "$USERNAME" && \
     mkdir -p /code/output && \
-    mkdir -p /code/coverage && \
     chown "$USERNAME":"$USERNAME" /code
 
 USER $USERNAME
@@ -21,6 +20,5 @@ COPY . /code
 
 USER root
 RUN find /code -user 0 -print0 | xargs -0 chown "$USERNAME":"$USERNAME"
-USER $USERNAME
 
 CMD [ "node", "app" ]
