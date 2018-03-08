@@ -1,7 +1,7 @@
 const moment = require('moment');
 const etlStore = require('./etl-toolkit/etlStore');
-const getAllIDs = require('./actions/getAllIDs');
-const dataUpdated = require('./actions/dataUpdated');
+const getAllIDs = require('./getAllIDs');
+const dataUpdated = require('./dataUpdated');
 const getService = require('./actions/getService');
 const populateRecordsFromIdsQueue = require('./etl-toolkit/queues/populateRecordsFromIds');
 const utils = require('./utils');
@@ -19,7 +19,7 @@ function clearState() {
 }
 
 function logStatus() {
-  log.info(`${utils.getDuplicates(etlStore.getIds()).length} duplicate ID`);
+  log.info(`${utils.getDuplicates(etlStore.getIds()).length} duplicate IDs`);
   log.info(`${etlStore.getFailedIds().length} errored records`);
 }
 
@@ -60,7 +60,6 @@ async function etl(dataServiceIn) {
   await loadLatestEtlData();
 
   if (await dataUpdated(etlStore.getLastRunDate())) {
-    // only one page of results despite there being over 800 records
     const pageIds = await getAllIDs();
     log.info(`Total ids: ${pageIds.length}`);
     etlStore.addIds(pageIds);

@@ -30,20 +30,20 @@ The application needs the API key available within the environment as the variab
 The output is uploaded to Azure Blob Storage, a suitable connection string should be set in the `AZURE_STORAGE_CONNECTION_STRING` variable.
 For further details see [Azure Blob Storage](https://azure.microsoft.com/en-gb/services/storage/blobs/).
 
-The ETL retrieves all the Sexual Health and Information Services from the Syndication API via the `modifiedsince` end point.
-All the data is reloaded with new IDs when a change is made, so the `modifiedsince` end point will contain all records. An incremental update approach is not possible due to the changing IDs.
+The ETL calls the `modifiedsince` end point to determine if the ETL needs to be run. 
+If the endpoint returns a 404 error, i.e page not found, there is no updated data and the ETL will not run.
+If a 200 code is returned the data is considered to have changed, and all data will be reloaded via the `all` endpoint.
+All the data is reloaded when a change is made. An incremental update approach is not possible due to the changing IDs.
 
 The date of the most recently modified file in blob storage beginning `shis-data`[<sup>*</sup>](#development-notes) is used as the last run date.
 
 If no file is present the last known good run date of `20/02/2018` will be used.
 
-The ETL will exit if the `modifiedsince` end point contains no records, or returns a `404` error.
-
 The ETL version from the [package.json](package.json) is included along with a datestamp to enable a full rescan if the data
 structure changes, as this will be reflected in the application version.
 
 Once the initial scan is complete, failed records will be revisited. IDs for records still failing after the second attempt
-are listed in a `summary.json` file.
+are listed in a `shis-data-summary.json`[<sup>*</sup>](#development-notes) file.
 
 Running `scripts/start` will bring up a docker container and initiate the scrape.
 

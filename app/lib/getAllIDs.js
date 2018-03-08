@@ -1,5 +1,5 @@
-const service = require('../syndicationService');
-const mapIds = require('../mappers/mapIds');
+const service = require('./syndicationService');
+const mapIds = require('./mappers/mapIds');
 
 async function getAllIDs() {
   const pageJson = await service.getAllPage();

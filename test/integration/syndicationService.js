@@ -20,6 +20,14 @@ function stubResults(filePath, date) {
     .reply(200, stubbedData);
 }
 
+function stubAllResults(filePath) {
+  const url = `/all.xml?apikey=${process.env.SYNDICATION_API_KEY}`;
+  const stubbedData = readFile(filePath);
+  nock(config.syndicationApiUrl)
+    .get(url)
+    .reply(200, stubbedData);
+}
+
 describe('Syndication Service', () => {
   it('should retrieve modified since page', async () => {
     const lastModifiedDate = moment('20180125', 'YYYYMMDD');
@@ -29,10 +37,9 @@ describe('Syndication Service', () => {
   });
 
   it('should throw error if syndication returns html', async () => {
-    const lastModifiedDate = moment('20180125', 'YYYYMMDD');
-    stubResults('test/resources/error.html', lastModifiedDate);
+    stubAllResults('test/resources/error.html');
     try {
-      await service.getModifiedSincePage(moment('2018-01-25'), 1);
+      await service.getAllPage();
       chai.assert.fail('should have thrown exception');
     } catch (ex) {
       expect(ex).to.exist;

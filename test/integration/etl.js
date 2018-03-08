@@ -20,16 +20,18 @@ function readFile(path) {
   return fs.readFileSync(path, 'utf8');
 }
 
-function stubResults(filePath, date) {
-  const stubbedData = readFile(filePath);
+function stubResults(date) {
+  const stubbedModifiedData = readFile('test/resources/modified-records.xml');
   const url = `/modifiedsince/${date.year()}/${date.month() + 1}/${date.date()}.xml?apikey=${process.env.SYNDICATION_API_KEY}&page=1`;
   nock(config.syndicationApiUrl)
     .get(url)
-    .reply(200, stubbedData);
+    .reply(200, stubbedModifiedData);
+
+  const stubbedAllData = readFile('test/resources/all-records.xml');
   const allUrl = `/all.xml?apikey=${process.env.SYNDICATION_API_KEY}`;
   nock(config.syndicationApiUrl)
     .get(allUrl)
-    .reply(200, stubbedData);
+    .reply(200, stubbedAllData);
 }
 
 function stubNoResults(date) {
@@ -58,7 +60,7 @@ beforeEach(() => {
 });
 
 function stubModifiedRecords(date) {
-  stubResults('test/resources/modified-records.xml', date);
+  stubResults(date);
 }
 
 describe('ETL', function test() {
@@ -115,7 +117,7 @@ describe('ETL', function test() {
       await etl.start(mockDataService(data, lastModifiedDate, false));
       chai.assert.fail('should have thrown exception');
     } catch (ex) {
-      expect(ex.message).to.equal('Failed to load page, status code:  500');
+      expect(ex.message).to.equal('500 - "Error: syndication is down"');
     }
   });
 

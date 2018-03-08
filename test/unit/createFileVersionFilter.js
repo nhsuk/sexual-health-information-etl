@@ -5,7 +5,7 @@ const createFileVersionFilter = require('../../app/lib/createFileVersionFilter')
 const expect = chai.expect;
 
 describe('create filter', () => {
-  it('should match file for version', () => {
+  it('should match file for version and name', () => {
     const files = [
       { name: 'shoe-data-20180220-0.1.json' },
       { name: 'shis-data-20180220-0.1.json' },
@@ -16,7 +16,7 @@ describe('create filter', () => {
     expect(result.name).to.be.equal('shis-data-20180220-0.1.json');
   });
 
-  it('should select data file not summary file', () => {
+  it('should select data file, not summary file', () => {
     const files = [
       { name: 'shoe-data-20180220-0.1.json' },
       { name: 'shis-data-summary-20180220-0.1.json' },
@@ -28,7 +28,7 @@ describe('create filter', () => {
     expect(result.name).to.be.equal('shis-data-20180220-0.1.json');
   });
 
-  it('should select data file not file with prefix', () => {
+  it('should select data file, not file with prefix', () => {
     const files = [
       { name: 'shoe-data-20180220-0.1.json' },
       { name: 'dev-shis-data-20180220-0.1.json' },

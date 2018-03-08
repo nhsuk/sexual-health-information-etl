@@ -1,4 +1,4 @@
-const apiRequest = require('./etl-toolkit/apiRequest');
+const request = require('request-promise-native');
 const xmlParser = require('./etl-toolkit/xmlParser');
 const config = require('./config');
 
@@ -17,7 +17,7 @@ function rejectHtml(json) {
 
 function getPage(id) {
   const url = `${config.syndicationApiUrl}/${id}.xml?apikey=${API_KEY}`;
-  return apiRequest(url).then(xmlParser).then(rejectHtml);
+  return request.get(url).then(xmlParser).then(rejectHtml);
 }
 
 function datePath(moment) {
@@ -26,12 +26,12 @@ function datePath(moment) {
 
 function getModifiedSincePage(moment, page) {
   const url = `${config.syndicationApiUrl}/modifiedsince/${datePath(moment)}.xml?apikey=${API_KEY}&page=${page}`;
-  return apiRequest(url).then(xmlParser).then(rejectHtml);
+  return request.get(url);
 }
 
 function getAllPage() {
   const url = `${config.syndicationApiUrl}/all.xml?apikey=${API_KEY}`;
-  return apiRequest(url).then(xmlParser).then(rejectHtml);
+  return request.get(url).then(xmlParser).then(rejectHtml);
 }
 
 module.exports = {
