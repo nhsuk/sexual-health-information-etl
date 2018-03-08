@@ -30,14 +30,17 @@ The application needs the API key available within the environment as the variab
 The output is uploaded to Azure Blob Storage, a suitable connection string should be set in the `AZURE_STORAGE_CONNECTION_STRING` variable.
 For further details see [Azure Blob Storage](https://azure.microsoft.com/en-gb/services/storage/blobs/).
 
-The ETL calls the `modifiedsince` end point to determine if the ETL needs to be run. 
+The ETL calls the `modifiedsince` end point to determine if the ETL needs to be run.
 If the endpoint returns a 404 error, i.e page not found, there is no updated data and the ETL will not run.
-If a 200 code is returned the data is considered to have changed, and all data will be reloaded via the `all` endpoint.
-All the data is reloaded when a change is made. An incremental update approach is not possible due to the changing IDs.
+
+If a `200` code is returned the data is considered to have changed, and all data will be reloaded via the `all` end point.
+All the data is reloaded when a change is made to the Sexual Health Services data, and the ID for a record may change when reloaded.
+An incremental update approach is not possible due to IDs not being consistent.
 
 The date of the most recently modified file in blob storage beginning `shis-data`[<sup>*</sup>](#development-notes) is used as the last run date.
 
 If no file is present the last known good run date of `20/02/2018` will be used.
+This date may be changed by the setting enviroment variable `INITIAL_LAST_RUN_DATE`.
 
 The ETL version from the [package.json](package.json) is included along with a datestamp to enable a full rescan if the data
 structure changes, as this will be reflected in the application version.
@@ -61,19 +64,18 @@ The files uploaded to Azure Blob Storage are:
 where `YYYYMMDD` is the current year, month and date, and `VERSION` is the current major version of the ETL as defined in the `package.json`.
 
 ### Development Notes
+
 The output file has been set to `dev-shis-data` in the development Docker compose file.
-This ensures that during development the output files will all include a `dev-` prefix
-so as not overwrite the production `shis-data` files in Azure.
+This ensures that during development the output files will all include a `dev-` prefix so as not overwrite the production `shis-data` files in Azure.
 
 ## Structure of JSON Data
 
 The output JSON will be an array of objects in the format shown in the [Sample SHIS Data](sample-shis-data.json) file.
 Most of the fields are self-explanatory, the three that require further explanation are `id`, `location`, and `venueType`.
 
-`id` is only used internally. This is an ID retrieved from Syndication with the filename prefixed to avoid collisions, i.e. `shis-data-19595086`.
-The ID for a record may change when data is updated.
+`id` is only used internally. This is an ID retrieved from Syndication and may change when data is updated.
 
-Location is in [GeoJSON](http://geojson.org/) format.
+`Location` is in [GeoJSON](http://geojson.org/) format.
 
 `venueType` can be either `Pharmacy`, `Clinic`, `Community`, `Other`, `ClinicCommunity` or `ClinicPharmacy`
 
@@ -102,13 +104,14 @@ environment.
 
 | Variable                           | Description                                                                                                 | Default                | Required |
 | :--------------------------------- | :---------------------------------------------------------------------------------------------------------- | ---------------------- | :------- |
+| `INITIAL_LAST_RUN_DATE`            | Initial run date in `YYYY-MM-DD` format to use if no previous run detected                                  | 2018-02-20             |          |
 | `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                                                             |                        | yes      |
 | `CONTAINER_NAME`                   | Azure storage container name                                                                                | etl-output             |          |
 | `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)                                                   | Depends on `NODE_ENV`  |          |
 | `NODE_ENV`                         | node environment                                                                                            | development            |          |
 | `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                        | yes      |
 | `SYNDICATION_SERVICE_END_POINT`    | URL to Syndicate service to scrape                                                                          | http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport | no      |
-| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data              | no       |
+| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data              |          |
 
 ## FAQ
 

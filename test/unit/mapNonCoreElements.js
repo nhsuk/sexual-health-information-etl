@@ -44,10 +44,29 @@ describe('mapNonCoreElements', () => {
     expect(result).to.equal(elementText);
   });
 
+  it('should trim leading and trailing spaces', () => {
+    const elementTitle = 'Opening times';
+    const elementText = '  text padded with spaces  ';
+    const nonCoreElements = {
+      nonCoreElement: [{ elementTitle, elementText }]
+    };
+    const result = mapNonCoreElements.openingTimes(nonCoreElements);
+    expect(result).to.equal('text padded with spaces');
+  });
+
   it('should gracefully handle missing elements', () => {
     const nonCoreElements = {
     };
     const result = mapNonCoreElements.serviceDetails(nonCoreElements);
+    expect(result).to.be.undefined;
+  });
+
+  it('should gracefully handle missing element text', () => {
+    const elementTitle = 'Opening times';
+    const nonCoreElements = {
+      nonCoreElement: [{ elementTitle }]
+    };
+    const result = mapNonCoreElements.openingTimes(nonCoreElements);
     expect(result).to.be.undefined;
   });
 });

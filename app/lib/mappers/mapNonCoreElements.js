@@ -7,7 +7,7 @@ function getElements(nonCoreElements) {
 
 function getElement(nonCoreElements, title) {
   const element = getElements(nonCoreElements).find(el => el.elementTitle === title);
-  return element ? element.elementText : undefined;
+  return element ? element.elementText && element.elementText.trim() : undefined;
 }
 
 function serviceDetails(nonCoreElements) {
