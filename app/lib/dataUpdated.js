@@ -2,11 +2,12 @@ const service = require('./syndicationService');
 
 async function dataUpdated(moment) {
   try {
+    // ideally this would request the page via a 'HEAD' call
+    // but this did not give consistent status codes from Syndication
     await service.getModifiedSincePage(moment, 1);
     return true;
   } catch (ex) {
-    // sometimes sydication returns an html page with status 200 and 404 message text
-    if (ex.statusCode === 404 || ex.message.includes(' 404')) {
+    if (ex.statusCode === 404) {
       return false;
     }
     throw ex;

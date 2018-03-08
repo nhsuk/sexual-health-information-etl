@@ -1,4 +1,5 @@
 const moment = require('moment');
+const config = require('./config');
 const etlStore = require('./etl-toolkit/etlStore');
 const getAllIDs = require('./getAllIDs');
 const dataUpdated = require('./dataUpdated');
@@ -55,8 +56,7 @@ async function loadLatestEtlData() {
 async function etl(dataServiceIn) {
   dataService = dataServiceIn;
   clearState();
-  // set initial date to last known run date
-  etlStore.setLastRunDate(moment('2018-02-20'));
+  etlStore.setLastRunDate(moment(config.initialLastRunDate));
   await loadLatestEtlData();
 
   if (await dataUpdated(etlStore.getLastRunDate())) {
