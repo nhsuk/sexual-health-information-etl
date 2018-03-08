@@ -12,6 +12,7 @@ const RECORD_KEY = 'id';
 const WORKERS = 1;
 let resolvePromise;
 let dataService;
+let startMoment;
 
 etlStore.setIdKey(RECORD_KEY);
 
@@ -29,7 +30,7 @@ async function etlComplete() {
   etlStore.saveSummary();
   logStatus();
   if (etlStore.getRecords().length > 0) {
-    await dataService.uploadData();
+    await dataService.uploadData(startMoment);
   }
   if (resolvePromise) {
     resolvePromise();
@@ -55,6 +56,7 @@ async function loadLatestEtlData() {
 
 async function etl(dataServiceIn) {
   dataService = dataServiceIn;
+  startMoment = moment();
   clearState();
   etlStore.setLastRunDate(moment(config.initialLastRunDate));
   await loadLatestEtlData();
