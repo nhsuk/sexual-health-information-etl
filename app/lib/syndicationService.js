@@ -1,5 +1,5 @@
 const request = require('request-promise-native');
-const xmlParser = require('./etl-toolkit/xmlParser');
+const xmlParser = require('./xmlParser');
 const config = require('./config');
 
 const API_KEY = process.env.SYNDICATION_API_KEY;
@@ -36,6 +36,6 @@ function getAllPage() {
 
 module.exports = {
   getAllPage,
-  getPage,
   getModifiedSincePage,
+  getPage,
 };

@@ -7,18 +7,18 @@ function mapService(rawService) {
   const entry = rawService.feed.entry;
   const service = entry.content.service;
   return {
-    id: utils.getId(entry.id),
-    name: service.name._,
-    type: service.type._,
     address: {
       addressLines: service.address.addressLine,
       postcode: service.address.postcode
     },
     contacts: mapContacts(service),
-    location: mapLocation(service),
-    serviceDetails: mapNonCore.serviceDetails(service.nonCoreElements),
     generalNotes: mapNonCore.generalNotes(service.nonCoreElements),
+    id: utils.getId(entry.id),
+    location: mapLocation(service),
+    name: service.name._,
     openingTimes: mapNonCore.openingTimes(service.nonCoreElements),
+    serviceDetails: mapNonCore.serviceDetails(service.nonCoreElements),
+    type: service.type._,
     venueType: mapNonCore.venueType(service.nonCoreElements)
   };
 }

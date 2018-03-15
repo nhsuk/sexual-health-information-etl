@@ -102,16 +102,17 @@ Environment variables are used to set application level settings for each
 environment.
 
 
-| Variable                           | Description                                                                                                 | Default                | Required |
-| :--------------------------------- | :---------------------------------------------------------------------------------------------------------- | ---------------------- | :------- |
-| `INITIAL_LAST_RUN_DATE`            | Initial run date in `YYYY-MM-DD` format to use if no previous run detected                                  | 2018-02-20             |          |
-| `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                                                             |                        | yes      |
-| `CONTAINER_NAME`                   | Azure storage container name                                                                                | etl-output             |          |
-| `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)                                                   | Depends on `NODE_ENV`  |          |
-| `NODE_ENV`                         | node environment                                                                                            | development            |          |
-| `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                        | yes      |
+| Variable                           | Description                                                                                                 | Default                                           | Required |
+| :--------------------------------- | :---------------------------------------------------------------------------------------------------------- | ------------------------------------------------- | :------- |
+| `INITIAL_LAST_RUN_DATE`            | Initial run date in `YYYY-MM-DD` format to use if no previous run detected                                  | 2018-02-20                                        |          |
+| `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                                                             |                                                   | yes      |
+| `CONTAINER_NAME`                   | Azure storage container name                                                                                | etl-output                                        |          |
+| `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)                                                   | Depends on `NODE_ENV`                             |          |
+| `NODE_ENV`                         | node environment                                                                                            | development                                       |          |
+| `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                                                   | yes      |
 | `SYNDICATION_SERVICE_END_POINT`    | URL to Syndicate service to scrape                                                                          | http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport | no      |
-| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data              |          |
+| `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data                                         |          |
+| `ETL_NAME`                         | ETL name for logging purposes                                                                               | set to `shis-data-etl` in the docker compose file | yes      |
 
 ## FAQ
 

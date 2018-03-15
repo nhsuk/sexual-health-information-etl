@@ -6,8 +6,8 @@ const expect = chai.expect;
 describe('mapLocation', () => {
   it('should map coordinates to geoJSON', () => {
     const coordinates = {
+      latitude: '51.51251',
       longitude: '-0.132011265',
-      latitude: '51.51251'
     };
     const location = mapLocation(coordinates);
     expect(location).to.exist;

@@ -66,9 +66,9 @@ async function getLatestBlob(filter, sort) {
 }
 
 module.exports = {
-  uploadToAzure,
-  downloadFromAzure,
   deleteFromAzure,
+  downloadFromAzure,
+  getLatestBlob,
   listBlobs,
-  getLatestBlob
+  uploadToAzure,
 };
