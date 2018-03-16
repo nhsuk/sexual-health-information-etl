@@ -48,7 +48,16 @@ structure changes, as this will be reflected in the application version.
 Once the initial scan is complete, failed records will be revisited. IDs for records still failing after the second attempt
 are listed in a `shis-data-summary.json`[<sup>*</sup>](#development-notes) file.
 
-Running `scripts/start` will bring up a docker container and initiate the scrape.
+Running `scripts/start` will bring up a docker container and initiate the scrape at a scheduled time, GMT. The default is
+11pm. The time of the scrape can be overridden by setting the environment variable `ETL_SCHEDULE`.
+e.g. `export ETL_SCHEDULE='25 15 * * *'` will start the processing at 3:25pm. 
+Note: the container time is GMT and does not take account of daylight saving, you may need to subtract an hour from the time if
+it is currently BST.
+
+During local development it is useful to run the scrape at any time. This is possible by running `node app.js` (with the appropriate env vars set).
+
+Further details on node-schedule available
+[here](https://www.npmjs.com/package/node-schedule)
 
 A successful scrape will result in the file `shis-data.json`[<sup>*</sup>](#development-notes) being written to the `output` folder and to the Azure Blob Storage
 location specified in the environmental variables.
@@ -107,6 +116,8 @@ environment.
 | `INITIAL_LAST_RUN_DATE`            | Initial run date in `YYYY-MM-DD` format to use if no previous run detected                                  | 2018-02-20                                        |          |
 | `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                                                             |                                                   | yes      |
 | `CONTAINER_NAME`                   | Azure storage container name                                                                                | etl-output                                        |          |
+| `DISABLE_SCHEDULER`                | set to 'true' to disable the scheduler                                                                      | false                 |          |
+| `ETL_SCHEDULE`                     | Time of day to run the upgrade. [Syntax](https://www.npmjs.com/package/node-schedule#cron-style-scheduling) | 0 23 * * * (11:00 pm) |          |
 | `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)                                                   | Depends on `NODE_ENV`                             |          |
 | `NODE_ENV`                         | node environment                                                                                            | development                                       |          |
 | `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                                                   | yes      |

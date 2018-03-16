@@ -15,6 +15,7 @@ services:
       SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
       SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
       OUTPUT_FILE: ${OUTPUT_FILE-dev-shis-data}
+      ETL_SCHEDULE: ${ETL_SCHEDULE}
 
   etl:
     extends:

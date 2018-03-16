@@ -1,0 +1,28 @@
+version: '2'
+services:
+  pharma-etl:
+    image: nhsuk/sexual-health-information-etl:${DOCKER_IMAGE_TAG}
+    environment:
+      ETL_NAME: 'shis-data-etl'
+      INITIAL_LAST_RUN_DATE: '${INITIAL_LAST_RUN_DATE}'
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
+      OUTPUT_FILE: ${OUTPUT_FILE}
+      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
+      ETL_SCHEDULE: ${ETL_SCHEDULE}
+      NODE_ENV: production
+    labels:
+      io.rancher.container.pull_image: always
+    logging:
+      driver: splunk
+      options:
+        splunk-url: ${SPLUNK_HEC_URL}
+        splunk-token: ${SPLUNK_HEC_TOKEN}
+        splunk-insecureskipverify: "true"
+        splunk-sourcetype: docker
+        splunk-source: shis-data-etl
+        splunk-verify-connection: "false"
+        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
+        splunk-format: json
