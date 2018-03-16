@@ -1086,9 +1086,9 @@ eslint-config-airbnb-base@^12.0.0, eslint-config-airbnb-base@^12.1.0:
   dependencies:
     eslint-restricted-globals "^0.1.1"
 
-eslint-config-nhsuk@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-nhsuk/-/eslint-config-nhsuk-0.12.0.tgz#63cf1734bfe0b5154c177979db3312b9e3ca75de"
+eslint-config-nhsuk@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-nhsuk/-/eslint-config-nhsuk-0.13.0.tgz#da948de422fd015608adbeafe1340b5b6b308153"
   dependencies:
     eslint "^4.0.0"
     eslint-config-airbnb-base "^12.0.0"
@@ -2790,6 +2790,13 @@ nested-error-stacks@^1.0.0:
   dependencies:
     inherits "~2.0.1"
 
+nhsuk-bunyan-logger@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/nhsuk-bunyan-logger/-/nhsuk-bunyan-logger-1.10.0.tgz#aa3e3aeab6231604bf1a4375e831d696e34e5949"
+  dependencies:
+    bunyan "^1.0.0"
+    is-nan "^1.0.0"
+
 nhsuk-bunyan-logger@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/nhsuk-bunyan-logger/-/nhsuk-bunyan-logger-1.9.0.tgz#dad8dc3bea0980d81840ce3883fddc8b1affb676"
@@ -3802,9 +3809,9 @@ snyk-policy@^1.10.2:
     snyk-try-require "^1.1.1"
     then-fs "^2.0.0"
 
-snyk-python-plugin@1.5.6:
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/snyk-python-plugin/-/snyk-python-plugin-1.5.6.tgz#ce31f0b687f23d127f7af39180ea2901b2891fec"
+snyk-python-plugin@1.5.7:
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/snyk-python-plugin/-/snyk-python-plugin-1.5.7.tgz#fe45da46b59becec6e41f34023948246778ebc3e"
 
 snyk-resolve-deps@1.7.0:
   version "1.7.0"
@@ -3832,9 +3839,9 @@ snyk-resolve@1.0.0, snyk-resolve@^1.0.0:
     debug "^2.2.0"
     then-fs "^2.0.0"
 
-snyk-sbt-plugin@1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/snyk-sbt-plugin/-/snyk-sbt-plugin-1.2.4.tgz#20b02f49c62b836f2a31362ac43d92d83d9b95e5"
+snyk-sbt-plugin@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/snyk-sbt-plugin/-/snyk-sbt-plugin-1.2.5.tgz#e86a3b4e727d206f7e41154b0dd2019b16102360"
   dependencies:
     debug "^2.2.0"
 
@@ -3854,9 +3861,9 @@ snyk-try-require@^1.1.1, snyk-try-require@^1.2.0:
     lru-cache "^4.0.0"
     then-fs "^2.0.0"
 
-snyk@^1.40.2:
-  version "1.69.10"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.69.10.tgz#34c66b21791435dd17fa2955904a5fdd6b57415d"
+snyk@^1.70.2:
+  version "1.70.2"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.70.2.tgz#5acaf01d882a2719d0ec277248499a36dc4d0487"
   dependencies:
     abbrev "^1.0.7"
     ansi-escapes "^1.3.0"
@@ -3880,10 +3887,10 @@ snyk@^1.40.2:
     snyk-nuget-plugin "1.3.9"
     snyk-php-plugin "1.3.2"
     snyk-policy "^1.10.2"
-    snyk-python-plugin "1.5.6"
+    snyk-python-plugin "1.5.7"
     snyk-resolve "1.0.0"
     snyk-resolve-deps "1.7.0"
-    snyk-sbt-plugin "1.2.4"
+    snyk-sbt-plugin "1.2.5"
     snyk-tree "^1.0.0"
     snyk-try-require "^1.2.0"
     tempfile "^1.1.1"

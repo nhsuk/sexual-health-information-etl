@@ -43,5 +43,5 @@ async function uploadData(startMoment) {
 
 module.exports = {
   getLatestData,
-  uploadData
+  uploadData,
 };

@@ -9,7 +9,7 @@ function mapService(rawService) {
   return {
     address: {
       addressLines: service.address.addressLine,
-      postcode: service.address.postcode
+      postcode: service.address.postcode,
     },
     contacts: mapContacts(service),
     generalNotes: mapNonCore.generalNotes(service.nonCoreElements),
@@ -19,7 +19,7 @@ function mapService(rawService) {
     openingTimes: mapNonCore.openingTimes(service.nonCoreElements),
     serviceDetails: mapNonCore.serviceDetails(service.nonCoreElements),
     type: service.type._,
-    venueType: mapNonCore.venueType(service.nonCoreElements)
+    venueType: mapNonCore.venueType(service.nonCoreElements),
   };
 }
 

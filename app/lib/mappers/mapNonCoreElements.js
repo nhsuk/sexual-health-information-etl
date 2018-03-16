@@ -30,5 +30,5 @@ module.exports = {
   generalNotes,
   openingTimes,
   serviceDetails,
-  venueType
+  venueType,
 };
