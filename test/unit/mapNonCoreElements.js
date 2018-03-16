@@ -8,7 +8,7 @@ describe('mapNonCoreElements', () => {
     const elementTitle = 'Service details';
     const elementText = 'The service details text';
     const nonCoreElements = {
-      nonCoreElement: [{ elementTitle, elementText }]
+      nonCoreElement: [{ elementText, elementTitle }],
     };
     const result = mapNonCoreElements.serviceDetails(nonCoreElements);
     expect(result).to.equal(elementText);
@@ -18,7 +18,7 @@ describe('mapNonCoreElements', () => {
     const elementTitle = 'General notes';
     const elementText = 'The general notes text';
     const nonCoreElements = {
-      nonCoreElement: [{ elementTitle, elementText }]
+      nonCoreElement: [{ elementText, elementTitle }],
     };
     const result = mapNonCoreElements.generalNotes(nonCoreElements);
     expect(result).to.equal(elementText);
@@ -28,7 +28,7 @@ describe('mapNonCoreElements', () => {
     const elementTitle = 'Opening times';
     const elementText = 'The opening times text';
     const nonCoreElements = {
-      nonCoreElement: [{ elementTitle, elementText }]
+      nonCoreElement: [{ elementText, elementTitle }],
     };
     const result = mapNonCoreElements.openingTimes(nonCoreElements);
     expect(result).to.equal(elementText);
@@ -38,7 +38,7 @@ describe('mapNonCoreElements', () => {
     const elementTitle = 'Venue Type';
     const elementText = 'Clinic';
     const nonCoreElements = {
-      nonCoreElement: [{ elementTitle, elementText }]
+      nonCoreElement: [{ elementText, elementTitle }],
     };
     const result = mapNonCoreElements.venueType(nonCoreElements);
     expect(result).to.equal(elementText);
@@ -48,7 +48,7 @@ describe('mapNonCoreElements', () => {
     const elementTitle = 'Opening times';
     const elementText = '  text padded with spaces  ';
     const nonCoreElements = {
-      nonCoreElement: [{ elementTitle, elementText }]
+      nonCoreElement: [{ elementText, elementTitle }],
     };
     const result = mapNonCoreElements.openingTimes(nonCoreElements);
     expect(result).to.equal('text padded with spaces');
@@ -64,7 +64,7 @@ describe('mapNonCoreElements', () => {
   it('should gracefully handle missing element text', () => {
     const elementTitle = 'Opening times';
     const nonCoreElements = {
-      nonCoreElement: [{ elementTitle }]
+      nonCoreElement: [{ elementTitle }],
     };
     const result = mapNonCoreElements.openingTimes(nonCoreElements);
     expect(result).to.be.undefined;

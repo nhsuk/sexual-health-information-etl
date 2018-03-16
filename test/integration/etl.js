@@ -6,7 +6,7 @@ const nock = require('nock');
 const expect = chai.expect;
 
 const etl = require('../../app/lib/etl');
-const etlStore = require('../../app/lib/etl-toolkit/etlStore');
+const etlStore = require('etl-toolkit').etlStore;
 const config = require('../../app/lib/config');
 
 function mockDataService(data, date, expectUpload) {
@@ -67,7 +67,7 @@ describe('ETL', function test() {
   this.timeout(5000);
 
   it('should update all if no previous data available', async () => {
-    const lastModifiedDate = moment('20180220', 'YYYYMMDD');
+    const lastModifiedDate = moment(config.initialLastRunDate);
     const ids = ['19708356', '19690074'];
     const data = [];
     const dataDate = undefined;

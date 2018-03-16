@@ -1,10 +1,10 @@
 function createLocation(coordinates) {
   return {
-    type: 'Point',
     coordinates: [
       Number(coordinates.longitude),
       Number(coordinates.latitude),
     ],
+    type: 'Point',
   };
 }
 

@@ -9,8 +9,8 @@ describe('mapIds', () => {
       feed: {
         entry: [
           { id: 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356' },
-          { id: 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074' }]
-      }
+          { id: 'http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19690074' }],
+      },
     };
 
     const ids = mapIds(results);

@@ -8,6 +8,7 @@ services:
     volumes:
       - .:/code
     environment:
+      ETL_NAME: 'shis-data-etl'
       INITIAL_LAST_RUN_DATE: '${INITIAL_LAST_RUN_DATE}'
       AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
       CONTAINER_NAME: ${CONTAINER_NAME}

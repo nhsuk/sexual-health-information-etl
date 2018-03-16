@@ -25,6 +25,6 @@ function loadJsonSync(filename) {
 }
 
 module.exports = {
-  saveJsonSync,
   loadJsonSync,
+  saveJsonSync,
 };
