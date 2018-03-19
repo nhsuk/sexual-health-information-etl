@@ -21,4 +21,4 @@ COPY . /code
 USER root
 RUN find /code -user 0 -print0 | xargs -0 chown "$USERNAME":"$USERNAME"
 
-CMD [ "node", "app" ]
+CMD [ "node", "schedule" ]
