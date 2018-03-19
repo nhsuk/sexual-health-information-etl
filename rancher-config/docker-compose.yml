@@ -1,6 +1,6 @@
 version: '2'
 services:
-  pharma-etl:
+  shis-etl:
     image: nhsuk/sexual-health-information-etl:${DOCKER_IMAGE_TAG}
     environment:
       ETL_NAME: 'shis-data-etl'
