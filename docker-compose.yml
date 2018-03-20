@@ -17,11 +17,30 @@ services:
       OUTPUT_FILE: ${OUTPUT_FILE-dev-shis-data}
       ETL_SCHEDULE: ${ETL_SCHEDULE}
 
-  etl:
+  shis-etl:
     extends:
       service: base-etl
+    environment:
+      ETL_NAME: shis-data-etl
+      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
+      OUTPUT_FILE: dev-shis-data
     volumes:
       - etl-node_modules:/code/node_modules
+      - output:/code/output
+
+  csu25-etl:
+    extends:
+      service: base-etl
+    environment:
+      ETL_NAME: csu25-data-etl
+      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/chlamydiascreeningunder25s
+      OUTPUT_FILE: dev-csu25-data
+    volumes:
+      - etl-node_modules2:/code/node_modules
+      - output2:/code/output
 
 volumes:
   etl-node_modules:
+  etl-node_modules2:
+  output:
+  output2:
