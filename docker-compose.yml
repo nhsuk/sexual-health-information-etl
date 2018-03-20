@@ -8,22 +8,21 @@ services:
     volumes:
       - .:/code
     environment:
-      ETL_NAME: 'shis-data-etl'
-      INITIAL_LAST_RUN_DATE: '${INITIAL_LAST_RUN_DATE}'
       AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
       CONTAINER_NAME: ${CONTAINER_NAME}
-      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
-      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
-      OUTPUT_FILE: ${OUTPUT_FILE-dev-shis-data}
+      ETL_NAME: shis-data-etl
       ETL_SCHEDULE: ${ETL_SCHEDULE}
+      INITIAL_LAST_RUN_DATE: '${INITIAL_LAST_RUN_DATE}'
+      OUTPUT_FILE: ${OUTPUT_FILE}
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
 
   shis-etl:
     extends:
       service: base-etl
     environment:
       ETL_NAME: shis-data-etl
-      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
       OUTPUT_FILE: dev-shis-data
+      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
     volumes:
       - etl-node_modules-shis:/code/node_modules
       - output-shis:/code/output
@@ -33,8 +32,8 @@ services:
       service: base-etl
     environment:
       ETL_NAME: csu25-data-etl
-      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/chlamydiascreeningunder25s
       OUTPUT_FILE: dev-csu25-data
+      SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/chlamydiascreeningunder25s
     volumes:
       - etl-node_modules-csu25:/code/node_modules
       - output-csu25:/code/output

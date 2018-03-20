@@ -1,9 +1,9 @@
 const schedule = require('node-schedule');
 
+const dataService = require('./app/lib/azureDataService');
+const etl = require('./app/lib/etl');
 const log = require('./app/lib/logger');
 const scheduleConfig = require('./app/lib/scheduleConfig');
-const etl = require('./app/lib/etl');
-const dataService = require('./app/lib/azureDataService');
 
 log.info(`NODE_ENV set to ${process.env.NODE_ENV}`);
 log.info(`Scheduling job with rule '${scheduleConfig.getSchedule()}'`);

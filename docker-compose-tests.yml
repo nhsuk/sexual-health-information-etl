@@ -10,6 +10,7 @@ services:
     volumes:
       - shis-etl-test-node_modules:/code/node_modules
     environment:
+      ETL_NAME: test-etl
       NODE_ENV: development
 
   test-ci:
@@ -21,6 +22,7 @@ services:
       - shis-etl-test-node_modules:/code/node_modules
     environment:
       COVERALLS_REPO_TOKEN: ${COVERALLS_REPO_TOKEN}
+      ETL_NAME: test-etl
       NODE_ENV: development
       TRAVIS: ${TRAVIS}
       TRAVIS_BRANCH: ${TRAVIS_BRANCH}

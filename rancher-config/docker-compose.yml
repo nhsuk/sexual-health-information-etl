@@ -3,16 +3,16 @@ services:
   shis-etl:
     image: nhsuk/sexual-health-information-etl:${DOCKER_IMAGE_TAG}
     environment:
-      ETL_NAME: 'shis-data-etl'
-      INITIAL_LAST_RUN_DATE: '${INITIAL_LAST_RUN_DATE}'
       AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
       CONTAINER_NAME: ${CONTAINER_NAME}
+      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
+      ETL_NAME: 'shis-data-etl'
+      ETL_SCHEDULE: ${SHIS_ETL_SCHEDULE}
+      INITIAL_LAST_RUN_DATE: '${SHIS_INITIAL_LAST_RUN_DATE}'
+      NODE_ENV: production
+      OUTPUT_FILE: ${SHIS_OUTPUT_FILE}
       SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
       SYNDICATION_SERVICE_END_POINT: ${SHIS_SYNDICATION_SERVICE_END_POINT}
-      OUTPUT_FILE: ${SHIS_OUTPUT_FILE}
-      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
-      ETL_SCHEDULE: ${SHIS_ETL_SCHEDULE}
-      NODE_ENV: production
     labels:
       io.rancher.container.pull_image: always
     logging:
@@ -30,16 +30,16 @@ services:
   csu25-etl:
     image: nhsuk/sexual-health-information-etl:${DOCKER_IMAGE_TAG}
     environment:
-      ETL_NAME: 'csu25-data-etl'
-      INITIAL_LAST_RUN_DATE: '${INITIAL_LAST_RUN_DATE}'
       AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
       CONTAINER_NAME: ${CONTAINER_NAME}
+      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
+      ETL_NAME: 'csu25-data-etl'
+      ETL_SCHEDULE: ${CSU25_ETL_SCHEDULE}
+      INITIAL_LAST_RUN_DATE: '${CSU25_INITIAL_LAST_RUN_DATE}'
+      NODE_ENV: production
+      OUTPUT_FILE: ${CSU25_OUTPUT_FILE}
       SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
       SYNDICATION_SERVICE_END_POINT:  ${CSU25_SYNDICATION_SERVICE_END_POINT}
-      OUTPUT_FILE: ${CSU25_OUTPUT_FILE}
-      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
-      ETL_SCHEDULE: ${CSU25_ETL_SCHEDULE}
-      NODE_ENV: production
     labels:
       io.rancher.container.pull_image: always
     logging:

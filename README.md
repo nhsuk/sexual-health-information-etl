@@ -74,7 +74,7 @@ where `YYYYMMDD` is the current year, month and date, and `VERSION` is the curre
 
 ### Development Notes
 The ETL may be configured to collect data from the 'Sexual Health Information and Support Services', or the 'Chlamydia Screening for Under 25s'
-end point in Syndication. The details above describe the operation when configuted to retrieve 'Sexual Health Information and Support Services' data.
+end point in Syndication. The details above describe the operation when configured to retrieve 'Sexual Health Information and Support Services' data.
 
 The provided [docker-compose.yml](docker-compose.yml) runs two containers, one for each possible ETL as described
 [below](#docker-compose-structure-for-deployment-and-development). The output files have been set to `dev-shis-data`
@@ -137,11 +137,10 @@ The `docker-compose.yml` used for development and deployment via Rancher have a 
 A stack is run with two `sexual-health-information-etl` images with different configurations.
 
 The convention for environment variables used in the Rancher configuration is to add a `SHIS_` or `CSU25_` prefix to the
-`ETL_SCHEDULE`, `SYNDICATION_SERVICE_END_POINT` and `OUTPUT_FILE` environment variables.
+`ETL_SCHEDULE`, `INITIAL_LAST_RUN_DATE`, `OUTPUT_FILE`, and `SYNDICATION_SERVICE_END_POINT` environment variables.
 These are then mapped to the appropriate suffix-less variable in the container, i.e. for the
 'Sexual Health Information and Support Services' container `SHIS_ETL_SCHEDULE` is mapped to `ETL_SCHEDULE`, and so on.
 
-The default
 ## FAQ
 
 * Is the application failing to start?
