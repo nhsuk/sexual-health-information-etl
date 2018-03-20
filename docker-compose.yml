@@ -25,8 +25,8 @@ services:
       SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
       OUTPUT_FILE: dev-shis-data
     volumes:
-      - etl-node_modules:/code/node_modules
-      - output:/code/output
+      - etl-node_modules-shis:/code/node_modules
+      - output-shis:/code/output
 
   csu25-etl:
     extends:
@@ -36,11 +36,11 @@ services:
       SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/chlamydiascreeningunder25s
       OUTPUT_FILE: dev-csu25-data
     volumes:
-      - etl-node_modules2:/code/node_modules
-      - output2:/code/output
+      - etl-node_modules-csu25:/code/node_modules
+      - output-csu25:/code/output
 
 volumes:
-  etl-node_modules:
-  etl-node_modules2:
-  output:
-  output2:
+  etl-node_modules-shis:
+  etl-node_modules-csu25:
+  output-shis:
+  output-csu25:
