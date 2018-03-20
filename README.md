@@ -1,5 +1,5 @@
 # Sexual Health Information ETL
-> ETL to retrieve sexual health information and support services from syndication and store as JSON
+> ETL to retrieve 'Sexual Health Information and Support Services', and 'Chlamydia Screening for Under 25s' data from syndication and store as JSON
 
 [![GitHub Release](https://img.shields.io/github/release/nhsuk/sexual-health-information-etl.svg)](https://github.com/nhsuk/sexual-health-information-etl/releases/latest/)
 [![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/sexual-health-information-etl.svg)](https://greenkeeper.io/)
@@ -48,7 +48,16 @@ structure changes, as this will be reflected in the application version.
 Once the initial scan is complete, failed records will be revisited. IDs for records still failing after the second attempt
 are listed in a `shis-data-summary.json`[<sup>*</sup>](#development-notes) file.
 
-Running `scripts/start` will bring up a docker container and initiate the scrape.
+Running `scripts/start` will bring up a docker container and initiate the scrape at a scheduled time, GMT. The default is
+11pm. The time of the scrape can be overridden by setting the environment variable `ETL_SCHEDULE`.
+e.g. `export ETL_SCHEDULE='25 15 * * *'` will start the processing at 3:25pm. 
+Note: the container time is GMT and does not take account of daylight saving, you may need to subtract an hour from the time if
+it is currently BST.
+
+During local development it is useful to run the scrape at any time. This is possible by running `node app.js` (with the appropriate env vars set).
+
+Further details on node-schedule available
+[here](https://www.npmjs.com/package/node-schedule)
 
 A successful scrape will result in the file `shis-data.json`[<sup>*</sup>](#development-notes) being written to the `output` folder and to the Azure Blob Storage
 location specified in the environmental variables.
@@ -64,9 +73,15 @@ The files uploaded to Azure Blob Storage are:
 where `YYYYMMDD` is the current year, month and date, and `VERSION` is the current major version of the ETL as defined in the `package.json`.
 
 ### Development Notes
+The ETL may be configured to collect data from the 'Sexual Health Information and Support Services', or the 'Chlamydia Screening for Under 25s'
+end point in Syndication. The details above describe the operation when configured to retrieve 'Sexual Health Information and Support Services' data.
 
-The output file has been set to `dev-shis-data` in the development Docker compose file.
-This ensures that during development the output files will all include a `dev-` prefix so as not overwrite the production `shis-data` files in Azure.
+The provided [docker-compose.yml](docker-compose.yml) runs two containers, one for each possible ETL as described
+[below](#docker-compose-structure-for-deployment-and-development). The output files have been set to `dev-shis-data`
+and `dev-csu25-data` respectively.
+
+This ensures that during development the output files will all include a `dev-` prefix so as not overwrite the production `shis-data`
+and `csu25-data` files in Azure.
 
 ## Structure of JSON Data
 
@@ -107,12 +122,24 @@ environment.
 | `INITIAL_LAST_RUN_DATE`            | Initial run date in `YYYY-MM-DD` format to use if no previous run detected                                  | 2018-02-20                                        |          |
 | `AZURE_STORAGE_CONNECTION_STRING`  | Azure storage connection string                                                                             |                                                   | yes      |
 | `CONTAINER_NAME`                   | Azure storage container name                                                                                | etl-output                                        |          |
+| `DISABLE_SCHEDULER`                | set to 'true' to disable the scheduler                                                                      | false                 |          |
+| `ETL_SCHEDULE`                     | Time of day to run the upgrade. [Syntax](https://www.npmjs.com/package/node-schedule#cron-style-scheduling) | 0 23 * * * (11:00 pm) |          |
 | `LOG_LEVEL`                        | [log level](https://github.com/trentm/node-bunyan#levels)                                                   | Depends on `NODE_ENV`                             |          |
 | `NODE_ENV`                         | node environment                                                                                            | development                                       |          |
 | `SYNDICATION_API_KEY`              | API key to access syndication                                                                               |                                                   | yes      |
 | `SYNDICATION_SERVICE_END_POINT`    | URL to Syndicate service to scrape                                                                          | http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport | no      |
 | `OUTPUT_FILE`                      | Filename saved to azure                                                                                     | shis-data                                         |          |
 | `ETL_NAME`                         | ETL name for logging purposes                                                                               | set to `shis-data-etl` in the docker compose file | yes      |
+
+## Docker Compose Structure for Deployment and Development
+
+The `docker-compose.yml` used for development and deployment via Rancher have a similar structure.
+A stack is run with two `sexual-health-information-etl` images with different configurations.
+
+The convention for environment variables used in the Rancher configuration is to add a `SHIS_` or `CSU25_` prefix to the
+`ETL_SCHEDULE`, `INITIAL_LAST_RUN_DATE`, `OUTPUT_FILE`, and `SYNDICATION_SERVICE_END_POINT` environment variables.
+These are then mapped to the appropriate suffix-less variable in the container, i.e. for the
+'Sexual Health Information and Support Services' container `SHIS_ETL_SCHEDULE` is mapped to `ETL_SCHEDULE`, and so on.
 
 ## FAQ
 

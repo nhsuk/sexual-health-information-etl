@@ -1,0 +1,55 @@
+version: '2'
+services:
+  shis-etl:
+    image: nhsuk/sexual-health-information-etl:${DOCKER_IMAGE_TAG}
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
+      ETL_NAME: 'shis-data-etl'
+      ETL_SCHEDULE: ${SHIS_ETL_SCHEDULE}
+      INITIAL_LAST_RUN_DATE: '${SHIS_INITIAL_LAST_RUN_DATE}'
+      NODE_ENV: production
+      OUTPUT_FILE: ${SHIS_OUTPUT_FILE}
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+      SYNDICATION_SERVICE_END_POINT: ${SHIS_SYNDICATION_SERVICE_END_POINT}
+    labels:
+      io.rancher.container.pull_image: always
+    logging:
+      driver: splunk
+      options:
+        splunk-url: ${SPLUNK_HEC_URL}
+        splunk-token: ${SPLUNK_HEC_TOKEN}
+        splunk-insecureskipverify: "true"
+        splunk-sourcetype: docker
+        splunk-source: shis-data-etl
+        splunk-verify-connection: "false"
+        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
+        splunk-format: json
+
+  csu25-etl:
+    image: nhsuk/sexual-health-information-etl:${DOCKER_IMAGE_TAG}
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: '${AZURE_STORAGE_CONNECTION_STRING}'
+      CONTAINER_NAME: ${CONTAINER_NAME}
+      DISABLE_SCHEDULER: ${DISABLE_SCHEDULER}
+      ETL_NAME: 'csu25-data-etl'
+      ETL_SCHEDULE: ${CSU25_ETL_SCHEDULE}
+      INITIAL_LAST_RUN_DATE: '${CSU25_INITIAL_LAST_RUN_DATE}'
+      NODE_ENV: production
+      OUTPUT_FILE: ${CSU25_OUTPUT_FILE}
+      SYNDICATION_API_KEY: ${SYNDICATION_API_KEY}
+      SYNDICATION_SERVICE_END_POINT:  ${CSU25_SYNDICATION_SERVICE_END_POINT}
+    labels:
+      io.rancher.container.pull_image: always
+    logging:
+      driver: splunk
+      options:
+        splunk-url: ${SPLUNK_HEC_URL}
+        splunk-token: ${SPLUNK_HEC_TOKEN}
+        splunk-insecureskipverify: "true"
+        splunk-sourcetype: docker
+        splunk-source: csu25-data-etl
+        splunk-verify-connection: "false"
+        tag: "{{`{{.ImageName}} {{.Name}} {{.FullID}}`}}"
+        splunk-format: json
