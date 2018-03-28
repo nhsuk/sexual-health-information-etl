@@ -12,7 +12,8 @@ const config = require('../../app/lib/config');
 function mockDataService(data, date, expectUpload) {
   return {
     getLatestData: () => new Promise(resolve => resolve({ data, date })),
-    uploadData: () => new Promise((resolve, reject) => (expectUpload ? resolve(true) : reject(new Error('Upload should not have been called')))),
+    uploadData: () => new Promise((resolve, reject) => (expectUpload ? resolve(true) : reject(new Error('Upload data should not have been called')))),
+    uploadSummary: () => new Promise((resolve, reject) => (expectUpload ? resolve(true) : reject(new Error('Upload summary should not have been called')))),
   };
 }
 
@@ -51,6 +52,21 @@ function stubResultsError(date) {
 function stubServiceLookup(filePath, id) {
   const stubbedData = readFile(filePath);
   nock(config.syndicationApiUrl)
+    .get(`/${id}.xml?apikey=${process.env.SYNDICATION_API_KEY}`)
+    .reply(200, stubbedData);
+}
+
+function stubServiceError(id) {
+  nock(config.syndicationApiUrl)
+    .get(`/${id}.xml?apikey=${process.env.SYNDICATION_API_KEY}`)
+    .reply(500, '500 error');
+}
+
+function stubServiceErrorThenLookup(filePath, id) {
+  const stubbedData = readFile(filePath);
+  nock(config.syndicationApiUrl)
+    .get(`/${id}.xml?apikey=${process.env.SYNDICATION_API_KEY}`)
+    .reply(500, '500 error')
     .get(`/${id}.xml?apikey=${process.env.SYNDICATION_API_KEY}`)
     .reply(200, stubbedData);
 }
@@ -99,6 +115,44 @@ describe('ETL', function test() {
     expect(etlStore.getRecords().length).to.equal(2);
     expect(etlStore.getRecord(ids[0]).name).to.equal('One');
     expect(etlStore.getRecord(ids[1]).name).to.equal('Two');
+  });
+
+  it('should track errored records', async () => {
+    const lastModifiedDate = moment('20180220', 'YYYYMMDD');
+    const ids = ['19708356', '19690074'];
+    const data = [
+      { id: ids[0], name: 'One' },
+      { id: ids[1], name: 'Two' },
+    ];
+    const dataService = mockDataService(data, lastModifiedDate, true);
+    stubModifiedRecords(lastModifiedDate);
+    stubServiceLookup('test/resources/service-one.xml', ids[0]);
+    stubServiceError(ids[1]);
+
+    await etl.start(dataService);
+    expect(etlStore.getRecords().length).to.equal(1);
+    expect(etlStore.getRecord(ids[0]).name).to.equal('One');
+    expect(etlStore.getErorredIds().length).to.equal(1);
+    expect(etlStore.getErorredIds()[0]).to.equal(ids[1]);
+  });
+
+  it('should retry errored records', async () => {
+    const lastModifiedDate = moment('20180220', 'YYYYMMDD');
+    const ids = ['19708356', '19690074'];
+    const data = [
+      { id: ids[0], name: 'One' },
+      { id: ids[1], name: 'Two' },
+    ];
+    const dataService = mockDataService(data, lastModifiedDate, true);
+    stubModifiedRecords(lastModifiedDate);
+    stubServiceLookup('test/resources/service-one.xml', ids[0]);
+    stubServiceErrorThenLookup('test/resources/service-two.xml', ids[1]);
+
+    await etl.start(dataService);
+    expect(etlStore.getRecords().length).to.equal(2);
+    expect(etlStore.getRecord(ids[0]).name).to.equal('One');
+    expect(etlStore.getRecord(ids[1]).name).to.equal('Two');
+    expect(etlStore.getErorredIds().length).to.equal(0);
   });
 
   it('should take no action if no modified records', async () => {

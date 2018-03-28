@@ -36,22 +36,38 @@ async function etlComplete() {
   logStatus();
   if (etlStore.getRecords().length > 0) {
     await dataService.uploadData(startMoment);
+    await dataService.uploadSummary(startMoment);
   }
   if (resolvePromise) {
     resolvePromise();
   }
 }
+
+function startRevisitFailuresQueue() {
+  if (etlStore.getErorredIds().length > 0) {
+    log.info('Revisiting failed IDs');
+    const options = {
+      populateRecordAction: getService,
+      queueComplete: etlComplete,
+      workers: WORKERS,
+    };
+    populateRecordsFromIdsQueue.startRetryQueue(options);
+  } else {
+    etlComplete();
+  }
+}
+
 function startPopulateRecordsFromIdsQueue() {
   const options = {
     populateRecordAction: getService,
-    queueComplete: etlComplete,
+    queueComplete: startRevisitFailuresQueue,
     workers: WORKERS,
   };
   populateRecordsFromIdsQueue.start(options);
 }
 
 async function loadLatestEtlData() {
-  const { data, date } = await dataService.getLatestData(utils.getMajorMinorVersion());
+  const { data, date } = await dataService.getLatestData();
   if (date) {
     lastRunDate = date;
     log.info(`Last ${utils.getMajorMinorVersion()} data uploaded on ${lastRunDate}`);
