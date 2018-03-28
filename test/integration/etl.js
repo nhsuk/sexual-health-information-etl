@@ -152,6 +152,7 @@ describe('ETL', function test() {
     expect(etlStore.getRecords().length).to.equal(2);
     expect(etlStore.getRecord(ids[0]).name).to.equal('One');
     expect(etlStore.getRecord(ids[1]).name).to.equal('Two');
+    expect(etlStore.getErorredIds().length).to.equal(0);
   });
 
   it('should take no action if no modified records', async () => {
