@@ -1,4 +1,4 @@
-0.2.0 / TBA
+0.2.0 / 2018-03-28
 ==================
 - Use etl-tookit
 - Use azure-data-service
