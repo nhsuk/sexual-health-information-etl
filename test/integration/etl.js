@@ -117,6 +117,24 @@ describe('ETL', function test() {
     expect(etlStore.getRecord(ids[1]).name).to.equal('Two');
   });
 
+  it('should clear down old data before run', async () => {
+    const lastModifiedDate = moment('20180220', 'YYYYMMDD');
+    const ids = ['19708356', '19690074'];
+    const data = [
+      { id: 'not', name: 'old' },
+      { id: 'present', name: 'data' },
+    ];
+    const dataService = mockDataService(data, lastModifiedDate, true);
+    stubModifiedRecords(lastModifiedDate);
+    stubServiceLookup('test/resources/service-one.xml', ids[0]);
+    stubServiceLookup('test/resources/service-two.xml', ids[1]);
+
+    await etl.start(dataService);
+    expect(etlStore.getRecords().length).to.equal(2);
+    expect(etlStore.getRecord(ids[0]).name).to.equal('One');
+    expect(etlStore.getRecord(ids[1]).name).to.equal('Two');
+  });
+
   it('should track errored records', async () => {
     const lastModifiedDate = moment('20180220', 'YYYYMMDD');
     const ids = ['19708356', '19690074'];

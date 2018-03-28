@@ -83,6 +83,7 @@ async function etl(dataServiceIn) {
   await loadLatestEtlData();
 
   if (await dataUpdated(lastRunDate)) {
+    clearState();
     const pageIds = await getAllIDs();
     log.info(`Total ids: ${pageIds.length}`);
     etlStore.addIds(pageIds);
