@@ -20,7 +20,7 @@ describe('mapService', () => {
     expect(service.address.addressLines[3]).to.equal('Greater London');
     expect(service.address.postcode).to.equal('W1D 6AQ');
     expect(service.contacts).to.exist;
-    expect(service.contacts.telephone).to.equal('020 3315 6699');
+    expect(service.contacts.telephoneNumber).to.equal('020 3315 6699');
     expect(service.contacts.website).to.equal('http://www.56deanstreet.nhs.uk/');
     // location logic fully tested in mapLocation unit test
     expect(service.location).to.exist;
