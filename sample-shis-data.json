@@ -24,6 +24,8 @@
   },
   "serviceDetails": "Emergency hormonal contraception (EHC) provider",
   "generalNotes": "You can also pick up and return completed chlamydia tests at any GP surgery in Somerset.",
-  "openingTimes": "Monday-Saturday 8am - 10.30pm, Sunday 8am - 9pm Please phone ahead to check the pharmacist who can provide EHC is on duty.",
+  "openingTimes": {
+    "description": "Monday-Saturday 8am - 10.30pm, Sunday 8am - 9pm Please phone ahead to check the pharmacist who can provide EHC is on duty."
+  },
   "venueType": "Pharmacy"
 }

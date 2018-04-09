@@ -26,7 +26,7 @@ describe('mapService', () => {
     expect(service.location).to.exist;
     expect(service.serviceDetails).to.equal('Some service details text');
     expect(service.generalNotes).to.equal('Some general notes');
-    expect(service.openingTimes).to.equal('Monday to Friday 3:30 - 4.30pm (walk-in)');
+    expect(service.openingTimes.description).to.equal('Monday to Friday 3:30 - 4.30pm (walk-in)');
     expect(service.venueType).to.equal('Clinic');
   });
 });
