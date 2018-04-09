@@ -2,6 +2,7 @@ const utils = require('../utils');
 const mapLocation = require('./mapLocation');
 const mapNonCore = require('./mapNonCoreElements');
 const mapContacts = require('./mapContacts');
+const mapGsdId = require('./mapGsdId');
 
 function mapService(rawService) {
   const entry = rawService.feed.entry;
@@ -13,6 +14,7 @@ function mapService(rawService) {
     },
     contacts: mapContacts(service),
     generalNotes: mapNonCore.generalNotes(service.nonCoreElements),
+    gsdId: mapGsdId(rawService),
     id: utils.getId(entry.id),
     location: mapLocation(service),
     name: service.name._,

@@ -1,0 +1,144 @@
+{
+  "feed": {
+    "$": {
+      "xmlns": "http://www.w3.org/2005/Atom"
+    },
+    "title": {
+      "_": "NHS Choices - 56 Dean Street Express",
+      "$": {
+        "type": "text"
+      }
+    },
+    "id": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356",
+    "rights": {
+      "_": "© Crown Copyright 2009",
+      "$": {
+        "type": "text"
+      }
+    },
+    "updated": "2018-02-28T15:41:28Z",
+    "category": {
+      "$": {
+        "term": "Service"
+      }
+    },
+    "logo": "http://www.nhs.uk/nhscwebservices/documents/logo1.jpg",
+    "author": {
+      "name": "NHS Choices",
+      "uri": "http://www.nhs.uk",
+      "email": "webservices@nhschoices.nhs.uk"
+    },
+    "link": [
+      {
+        "$": {
+          "rel": "self",
+          "type": "application/xml",
+          "title": "NHS Choices - 56 Dean Street Express",
+          "href": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=changeme"
+        }
+      }
+    ],
+    "tracking": {
+      "_": "<img style=\"border: 0; width: 1px; height: 1px;\" alt=\"\" src=\"http://statse.webtrendslive.com/dcss9yzisf9xjyg74mgbihg8p_8d2u/njs.gif?dcsuri=/services%2ftypes%2fsexualhealthinformationandsupport%2f19708356&amp;wt.js=no&amp;wt.cg_n=syndication\"/>",
+      "$": {
+        "xmlns": "http://syndication.nhschoices.nhs.uk/services"
+      }
+    },
+    "complete": {
+      "$": {
+        "xmlns": "http://purl.org/syndication/history/1.0"
+      }
+    },
+    "entry": {
+      "id": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356",
+      "title": {
+        "_": "56 Dean Street Express",
+        "$": {
+          "type": "text"
+        }
+      },
+      "updated": "2018-02-28T15:41:28Z",
+      "link": [
+        {
+          "$": {
+            "rel": "self",
+            "title": "56 Dean Street Express",
+            "href": "http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport/19708356?apikey=changeme"
+          }
+        },
+        {
+          "$": {
+            "rel": "alternate",
+            "title": "56 Dean Street Express",
+            "href": "http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=8972333"
+          }
+        }
+      ],
+      "content": {
+        "$": {
+          "type": "application/xml"
+        },
+        "service": {
+          "$": {
+            "xmlns:s": "http://syndication.nhschoices.nhs.uk/services"
+          },
+          "name": {
+            "_": "56 Dean Street Express",
+            "$": {
+              "firstLetter": "5"
+            }
+          },
+          "type": {
+            "_": "Sexual health information and support",
+            "$": {
+              "firstLetter": "S"
+            }
+          },
+          "summaryText": "",
+          "WebAddress": "http://www.56deanstreet.nhs.uk/",
+          "address": {
+            "addressLine": [
+              "56 Dean Street",
+              "Soho",
+              "London",
+              "Greater London"
+            ],
+            "postcode": "W1D 6AQ"
+          },
+          "contact": {
+            "$": {
+              "type": "General"
+            },
+            "telephone": "020 3315 6699",
+            "email": "56deanstreet@chelwest.nhs.uk"
+          },
+          "longitude": "-0.132011265",
+          "latitude": "51.51251",
+          "thingsShouldKnow": "",
+          "SuppliedBy": "Serco Global Services",
+          "SuppliedOn": "2018-02-20 00:00:00Z",
+          "nonCoreElements": {
+            "nonCoreElement": [
+              {
+                "elementTitle": "Service details",
+                "elementText": "Some service details text"
+              },
+              {
+                "elementTitle": "General notes",
+                "elementText": "Some general notes"
+              },
+              {
+                "elementTitle": "Opening times",
+                "elementText": "Monday to Friday 3:30 - 4.30pm (walk-in)"
+              },
+              {
+                "elementTitle": "Venue Type",
+                "elementText": "Clinic"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

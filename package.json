@@ -1,6 +1,6 @@
 {
   "name": "sexual-health-information-etl",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "ETL to retrieve sexual health information and support services from syndication and store as JSON",
   "main": "app.js",
   "repository": "https://github.com/nhsuk/sexual-health-information-etl.git",
