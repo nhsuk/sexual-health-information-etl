@@ -10,7 +10,7 @@ describe('mapService', () => {
     expect(service.id).to.equal('19708356');
     expect(service.gsdId).to.equal('8972333');
     expect(service.name).to.equal('56 Dean Street Express');
-    expect(service.type).to.equal('Sexual health information and support');
+    expect(service.serviceType).to.equal('Sexual health information and support');
     expect(service.address).to.exist;
     expect(service.address.addressLines).to.exist;
     expect(service.address.addressLines.length).to.equal(4);

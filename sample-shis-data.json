@@ -2,7 +2,7 @@
   "id": "19595086",
   "gsdId":"9413262",
   "name": "Cranleigh Gardens Pharmacy",
-  "type": "Sexual health information and support",
+  "serviceType": "Sexual health information and support",
   "address": {
     "addressLines": [
       "Cranleigh Gardens Medical Centre",

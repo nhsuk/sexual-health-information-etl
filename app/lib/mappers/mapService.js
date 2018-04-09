@@ -20,7 +20,7 @@ function mapService(rawService) {
     name: service.name._,
     openingTimes: mapNonCore.openingTimes(service.nonCoreElements),
     serviceDetails: mapNonCore.serviceDetails(service.nonCoreElements),
-    type: service.type._,
+    serviceType: service.type._,
     venueType: mapNonCore.venueType(service.nonCoreElements),
   };
 }
