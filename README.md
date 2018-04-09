@@ -90,6 +90,9 @@ Most of the fields are self-explanatory, the three that require further explanat
 
 `id` is only used internally. This is an ID retrieved from Syndication and may change when data is updated.
 
+`gsdId` is the Generic Service Directory ID at time of running. This is the ID used in the NHS Services Directory, i.e. `9413748`
+would be accessed at the URL http://www.nhs.uk/ServiceDirectories/Pages/GenericServiceDetails.aspx?id=9413748.
+
 `Location` is in [GeoJSON](http://geojson.org/) format.
 
 `venueType` can be either `Pharmacy`, `Clinic`, `Community`, `Other`, `ClinicCommunity` or `ClinicPharmacy`

@@ -7,6 +7,8 @@ const expect = chai.expect;
 describe('mapService', () => {
   it('should map raw service JSON to preferred structure', () => {
     const service = mapService(rawService);
+    expect(service.id).to.equal('19708356');
+    expect(service.gsdId).to.equal('8972333');
     expect(service.name).to.equal('56 Dean Street Express');
     expect(service.type).to.equal('Sexual health information and support');
     expect(service.address).to.exist;
