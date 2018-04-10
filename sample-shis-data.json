@@ -2,7 +2,7 @@
   "id": "19595086",
   "gsdId":"9413262",
   "name": "Cranleigh Gardens Pharmacy",
-  "type": "Sexual health information and support",
+  "serviceType": "Sexual health information and support",
   "address": {
     "addressLines": [
       "Cranleigh Gardens Medical Centre",
@@ -12,7 +12,7 @@
     "postcode": "TA6 5JS"
   },
   "contacts": {
-    "telephone": "01278 427645",
+    "telephoneNumber": "01278 427645",
     "website": "http://www.swishservices.co.uk/"
   },
   "location": {
@@ -24,6 +24,8 @@
   },
   "serviceDetails": "Emergency hormonal contraception (EHC) provider",
   "generalNotes": "You can also pick up and return completed chlamydia tests at any GP surgery in Somerset.",
-  "openingTimes": "Monday-Saturday 8am - 10.30pm, Sunday 8am - 9pm Please phone ahead to check the pharmacist who can provide EHC is on duty.",
+  "openingTimes": {
+    "description": "Monday-Saturday 8am - 10.30pm, Sunday 8am - 9pm Please phone ahead to check the pharmacist who can provide EHC is on duty."
+  },
   "venueType": "Pharmacy"
 }
