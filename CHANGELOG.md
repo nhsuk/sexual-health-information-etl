@@ -1,10 +1,13 @@
-0.3.0 / 2018-04-12
+0.4.0 / 2018-04-13
+==================
+- Update npm dependencies
+
+0.3.0 / N/A
 ==================
 - Add GSD ID to output data
 - Map telephone number to `contacts.telephoneNumber`
 - Map service type to `serviceType`
 - Map opening times to `openingTimes.description`
-- Update npm dependencies
 
 0.2.0 / 2018-03-28
 ==================
