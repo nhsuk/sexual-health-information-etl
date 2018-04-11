@@ -1,4 +1,6 @@
 const schedule = require('node-schedule');
+const requireEnv = require('require-environment-variables');
+requireEnv(['ETL_NAME']);
 
 const dataService = require('./app/lib/azureDataService');
 const etl = require('./app/lib/etl');

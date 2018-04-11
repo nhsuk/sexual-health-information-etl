@@ -1,5 +1,4 @@
 const moment = require('moment');
-const requireEnv = require('require-environment-variables');
 
 const config = require('./config');
 const etlStore = require('etl-toolkit').etlStore;
@@ -10,7 +9,6 @@ const populateRecordsFromIdsQueue = require('etl-toolkit').queues.populateRecord
 const utils = require('./utils');
 const log = require('./logger');
 
-requireEnv(['ETL_NAME']);
 
 const RECORD_KEY = 'id';
 const WORKERS = 1;
