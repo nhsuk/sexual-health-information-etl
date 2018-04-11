@@ -1,16 +1,13 @@
 const moment = require('moment');
-const requireEnv = require('require-environment-variables');
 
 const config = require('./config');
+const dataUpdated = require('./dataUpdated');
 const etlStore = require('etl-toolkit').etlStore;
 const getAllIDs = require('./getAllIDs');
-const dataUpdated = require('./dataUpdated');
 const getService = require('./actions/getService');
+const log = require('./logger');
 const populateRecordsFromIdsQueue = require('etl-toolkit').queues.populateRecordsFromIds;
 const utils = require('./utils');
-const log = require('./logger');
-
-requireEnv(['ETL_NAME']);
 
 const RECORD_KEY = 'id';
 const WORKERS = 1;

@@ -1,4 +1,8 @@
-0.3.0 / 2018-04-12
+0.4.0 / 2018-04-13
+==================
+- Update npm dependencies
+
+0.3.0 / N/A
 ==================
 - Add GSD ID to output data
 - Map telephone number to `contacts.telephoneNumber`
