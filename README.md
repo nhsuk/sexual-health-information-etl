@@ -5,7 +5,6 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/nhsuk/sexual-health-information-etl.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/nhsuk/sexual-health-information-etl.svg?branch=master)](https://travis-ci.org/nhsuk/sexual-health-information-etl)
 [![Coverage Status](https://coveralls.io/repos/github/nhsuk/sexual-health-information-etl/badge.svg?branch=master)](https://coveralls.io/github/nhsuk/sexual-health-information-etl?branch=master)
-[![Known Vulnerabilities](https://snyk.io/test/github/nhsuk/sexual-health-information-etl/badge.svg)](https://snyk.io/test/github/nhsuk/sexual-health-information-etl)
 
 ## Installation
 
