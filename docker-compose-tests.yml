@@ -9,9 +9,6 @@ services:
     command: yarn test
     volumes:
       - shis-etl-test-node_modules:/code/node_modules
-    environment:
-      ETL_NAME: test-etl
-      NODE_ENV: development
 
   test-ci:
     extends:
