@@ -1,12 +1,14 @@
 const chai = require('chai');
 const mapService = require('../../app/lib/mappers/mapService');
 const rawService = require('../resources/rawService');
+const serviceWithHtmlEntities = require('../resources/rawService-html-entities');
 
 const expect = chai.expect;
 
 describe('mapService', () => {
   it('should map raw service JSON to preferred structure', () => {
     const service = mapService(rawService);
+
     expect(service.id).to.equal('19708356');
     expect(service.gsdId).to.equal('8972333');
     expect(service.name).to.equal('56 Dean Street Express');
@@ -28,5 +30,12 @@ describe('mapService', () => {
     expect(service.generalNotes).to.equal('Some general notes');
     expect(service.openingTimes.description).to.equal('Monday to Friday 3:30 - 4.30pm (walk-in)');
     expect(service.venueType).to.equal('Clinic');
+  });
+
+  it('should trim whitespace, remove \'&quot;\' and decode \'&apos;\' & \'&amp;\' for descriptions', () => {
+    const service = mapService(serviceWithHtmlEntities);
+
+    expect(service.serviceDetails).to.equal('\'Service & details & description.\'');
+    expect(service.openingTimes.description).to.equal('\'Opening & times & description.\'');
   });
 });
