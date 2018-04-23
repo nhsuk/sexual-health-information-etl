@@ -1,6 +1,7 @@
-0.5.0 / TBD
+0.5.0 / 2018-04-24
 ==================
 - Remove snyk
+- Remove `&quot;`, decode `&amp;` and `&apos;` from `openingTimes.description` and `serviceDetails`
 
 0.4.0 / 2018-04-13
 ==================

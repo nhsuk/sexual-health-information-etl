@@ -3,6 +3,10 @@ const mapLocation = require('./mapLocation');
 const mapNonCore = require('./mapNonCoreElements');
 const mapContacts = require('./mapContacts');
 const mapGsdId = require('./mapGsdId');
+const Entities = require('html-entities').AllHtmlEntities;
+
+const entities = new Entities();
+const htmlQuoteRegex = /&quot;/g;
 
 function mapService(rawService) {
   const entry = rawService.feed.entry;
@@ -19,9 +23,9 @@ function mapService(rawService) {
     location: mapLocation(service),
     name: service.name._,
     openingTimes: {
-      description: mapNonCore.openingTimes(service.nonCoreElements),
+      description: entities.decode(mapNonCore.openingTimes(service.nonCoreElements).replace(htmlQuoteRegex, '')).trim(),
     },
-    serviceDetails: mapNonCore.serviceDetails(service.nonCoreElements),
+    serviceDetails: entities.decode(mapNonCore.serviceDetails(service.nonCoreElements).replace(htmlQuoteRegex, '')).trim(),
     serviceType: service.type._,
     venueType: mapNonCore.venueType(service.nonCoreElements),
   };
