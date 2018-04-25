@@ -1,6 +1,7 @@
-0.6.0 / 2018-04-26
+0.6.0 / 2018-04-27
 ==================
 - Remove `&quot;`, decode `&amp;` and `&apos;` from `generalNotes`
+- Update npm dependencies
 
 0.5.0 / 2018-04-24
 ==================
