@@ -1,12 +1,8 @@
 const utils = require('../utils');
 const mapLocation = require('./mapLocation');
-const mapNonCore = require('./mapNonCoreElements');
+const mapNonCoreElements = require('./mapNonCoreElements');
 const mapContacts = require('./mapContacts');
 const mapGsdId = require('./mapGsdId');
-const Entities = require('html-entities').AllHtmlEntities;
-
-const entities = new Entities();
-const htmlQuoteRegex = /&quot;/g;
 
 function mapService(rawService) {
   const entry = rawService.feed.entry;
@@ -17,17 +13,17 @@ function mapService(rawService) {
       postcode: service.address.postcode,
     },
     contacts: mapContacts(service),
-    generalNotes: mapNonCore.generalNotes(service.nonCoreElements),
+    generalNotes: mapNonCoreElements(service.nonCoreElements, 'General notes'),
     gsdId: mapGsdId(rawService),
     id: utils.getId(entry.id),
     location: mapLocation(service),
     name: service.name._,
     openingTimes: {
-      description: entities.decode(mapNonCore.openingTimes(service.nonCoreElements).replace(htmlQuoteRegex, '')).trim(),
+      description: mapNonCoreElements(service.nonCoreElements, 'Opening times'),
     },
-    serviceDetails: entities.decode(mapNonCore.serviceDetails(service.nonCoreElements).replace(htmlQuoteRegex, '')).trim(),
+    serviceDetails: mapNonCoreElements(service.nonCoreElements, 'Service details'),
     serviceType: service.type._,
-    venueType: mapNonCore.venueType(service.nonCoreElements),
+    venueType: mapNonCoreElements(service.nonCoreElements, 'Venue Type'),
   };
 }
 

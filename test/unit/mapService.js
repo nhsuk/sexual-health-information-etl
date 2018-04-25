@@ -35,6 +35,7 @@ describe('mapService', () => {
   it('should trim whitespace, remove \'&quot;\' and decode \'&apos;\' & \'&amp;\' for descriptions', () => {
     const service = mapService(serviceWithHtmlEntities);
 
+    expect(service.generalNotes).to.equal('\'General & notes & description.\'');
     expect(service.serviceDetails).to.equal('\'Service & details & description.\'');
     expect(service.openingTimes.description).to.equal('\'Opening & times & description.\'');
   });
