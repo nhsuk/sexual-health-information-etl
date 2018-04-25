@@ -1,3 +1,7 @@
+0.6.0 / 2018-04-26
+==================
+- Remove `&quot;`, decode `&amp;` and `&apos;` from `generalNotes`
+
 0.5.0 / 2018-04-24
 ==================
 - Remove snyk

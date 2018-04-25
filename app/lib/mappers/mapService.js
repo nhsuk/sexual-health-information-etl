@@ -17,7 +17,7 @@ function mapService(rawService) {
       postcode: service.address.postcode,
     },
     contacts: mapContacts(service),
-    generalNotes: mapNonCore.generalNotes(service.nonCoreElements),
+    generalNotes: entities.decode(mapNonCore.generalNotes(service.nonCoreElements).replace(htmlQuoteRegex, '')).trim(),
     gsdId: mapGsdId(rawService),
     id: utils.getId(entry.id),
     location: mapLocation(service),
