@@ -6,8 +6,9 @@ const nock = require('nock');
 const expect = chai.expect;
 
 const etl = require('../../app/lib/etl');
-const etlStore = require('etl-toolkit').etlStore;
 const config = require('../../app/lib/config');
+
+const etlStore = etl.etlStore;
 
 function mockDataService(data, date, expectUpload) {
   return {
@@ -150,8 +151,8 @@ describe('ETL', function test() {
     await etl.start(dataService);
     expect(etlStore.getRecords().length).to.equal(1);
     expect(etlStore.getRecord(ids[0]).name).to.equal('One');
-    expect(etlStore.getErorredIds().length).to.equal(1);
-    expect(etlStore.getErorredIds()[0]).to.equal(ids[1]);
+    expect(etlStore.getErroredIds().length).to.equal(1);
+    expect(etlStore.getErroredIds()[0]).to.equal(ids[1]);
   });
 
   it('should retry errored records', async () => {
@@ -170,7 +171,7 @@ describe('ETL', function test() {
     expect(etlStore.getRecords().length).to.equal(2);
     expect(etlStore.getRecord(ids[0]).name).to.equal('One');
     expect(etlStore.getRecord(ids[1]).name).to.equal('Two');
-    expect(etlStore.getErorredIds().length).to.equal(0);
+    expect(etlStore.getErroredIds().length).to.equal(0);
   });
 
   it('should take no action if no modified records', async () => {
