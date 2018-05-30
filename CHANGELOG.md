@@ -2,6 +2,7 @@
 ==================
 - Remove `&quot;`, decode `&amp;` and `&apos;` from `generalNotes`
 - Update npm dependencies
+- Upgrade to class based ETL toolkit
 
 0.5.0 / 2018-04-24
 ==================

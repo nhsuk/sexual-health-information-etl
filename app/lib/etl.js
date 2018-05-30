@@ -2,21 +2,27 @@ const moment = require('moment');
 
 const config = require('./config');
 const dataUpdated = require('./dataUpdated');
-const etlStore = require('etl-toolkit').etlStore;
+const EtlStore = require('etl-toolkit').EtlStore;
 const getAllIDs = require('./getAllIDs');
 const getService = require('./actions/getService');
 const log = require('./logger');
-const populateRecordsFromIdsQueue = require('etl-toolkit').queues.populateRecordsFromIds;
+const PopulateRecordsQueue = require('etl-toolkit').queues.populateRecordsFromIds;
 const utils = require('./utils');
 
-const RECORD_KEY = 'id';
 const WORKERS = 1;
 let resolvePromise;
 let dataService;
 let startMoment;
 let lastRunDate;
 
-etlStore.setIdKey(RECORD_KEY);
+const etlStore = new EtlStore({ idKey: config.idKey, log, outputFile: config.outputFile });
+
+const populateRecordsFromIdsQueue = new PopulateRecordsQueue({
+  etlStore,
+  hitsPerHour: config.hitsPerHour,
+  log,
+  populateRecordAction: getService,
+});
 
 function clearState() {
   etlStore.clearState();
@@ -24,7 +30,7 @@ function clearState() {
 
 function logStatus() {
   log.info(`${utils.getDuplicates(etlStore.getIds()).length} duplicate IDs`);
-  log.info(`${etlStore.getErorredIds().length} errored records`);
+  log.info(`${etlStore.getErroredIds().length} errored records`);
 }
 
 async function etlComplete() {
@@ -41,10 +47,9 @@ async function etlComplete() {
 }
 
 function startRevisitFailuresQueue() {
-  if (etlStore.getErorredIds().length > 0) {
+  if (etlStore.getErroredIds().length > 0) {
     log.info('Revisiting failed IDs');
     const options = {
-      populateRecordAction: getService,
       queueComplete: etlComplete,
       workers: WORKERS,
     };
@@ -56,7 +61,6 @@ function startRevisitFailuresQueue() {
 
 function startPopulateRecordsFromIdsQueue() {
   const options = {
-    populateRecordAction: getService,
     queueComplete: startRevisitFailuresQueue,
     workers: WORKERS,
   };
@@ -68,7 +72,7 @@ async function loadLatestEtlData() {
   if (date) {
     lastRunDate = date;
     log.info(`Last ${utils.getMajorMinorVersion()} data uploaded on ${lastRunDate}`);
-    data.map(etlStore.addRecord);
+    data.map(record => etlStore.addRecord(record));
   }
 }
 
@@ -84,7 +88,7 @@ async function etl(dataServiceIn) {
     const pageIds = await getAllIDs();
     log.info(`Total ids: ${pageIds.length}`);
     etlStore.addIds(pageIds);
-    pageIds.forEach(etlStore.deleteRecord);
+    pageIds.forEach(id => etlStore.deleteRecord(id));
     startPopulateRecordsFromIdsQueue();
   } else {
     log.info('No modified records, exiting');
@@ -108,5 +112,6 @@ function start(dataServiceIn) {
 }
 
 module.exports = {
+  etlStore,
   start,
 };

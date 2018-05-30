@@ -21,7 +21,7 @@ services:
       service: base-etl
     environment:
       ETL_NAME: shis-data-etl
-      OUTPUT_FILE: dev-shis-data
+      OUTPUT_FILE: mh-shis-data
       SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/sexualhealthinformationandsupport
     volumes:
       - etl-node_modules-shis:/code/node_modules
@@ -32,7 +32,7 @@ services:
       service: base-etl
     environment:
       ETL_NAME: csu25-data-etl
-      OUTPUT_FILE: dev-csu25-data
+      OUTPUT_FILE: mh-csu25-data
       SYNDICATION_SERVICE_END_POINT: http://v1.syndication.nhschoices.nhs.uk/services/types/chlamydiascreeningunder25s
     volumes:
       - etl-node_modules-csu25:/code/node_modules
